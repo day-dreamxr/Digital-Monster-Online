@@ -13,6 +13,10 @@ signal background_color_changed(new_value: Color)
 signal screen_background_index_changed(new_value: int)
 
 func _ready() -> void:
+	SaveData.saved.connect(reload_colors)
+	reload_colors()
+
+func reload_colors() -> void:
 	$Digivice.modulate = SaveData.body_color
 	%BodyColorPicker.color = SaveData.body_color
 	$Cage.modulate = SaveData.cage_color
@@ -59,3 +63,21 @@ func _on_cycle_screen_background_pressed() -> void:
 
 func _on_export_button_pressed() -> void:
 	SaveData.export_save_data()
+
+func _on_import_button_pressed() -> void:
+	if OS.has_feature("web"):
+		$WebSaveDataPicker.show()
+	else:
+		$SaveDataPicker.show()
+
+func _on_save_data_selected(path: String) -> Error:
+	print("yay")
+	var file := FileAccess.get_file_as_bytes(path)
+	var err := FileAccess.get_open_error()
+	if err != OK:
+		return err
+	SaveData.import_save_data(file)
+	return OK
+
+func _on_web_save_data_picker_file_loaded(content: PackedByteArray, filename: String) -> void:
+	SaveData.import_save_data(content)

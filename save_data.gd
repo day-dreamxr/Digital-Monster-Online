@@ -1,4 +1,5 @@
 extends Node
+# Thank you to https://github.com/jaredtalbot from Boardshapes for the original version of this file
 
 var body_color := Color():
 	set(value):
@@ -99,3 +100,11 @@ func export_save_data() -> void:
 		file.close()
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://save_data.json"))
 	
+func import_save_data(content: PackedByteArray):
+	var json = JSON.parse_string(content.get_string_from_utf8())
+	if json is Dictionary:
+		body_color = Color.html(json.get("body_color", body_color))
+		cage_color = Color.html(json.get("cage_color", cage_color))
+		background_color = Color.html(json.get("background_color", background_color))
+		screen_background_index = json.get("screen_background_index", screen_background_index)
+	save_preferences()
