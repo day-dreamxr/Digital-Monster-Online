@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://h5wq44ng6xsq"]
+
+[ext_resource type="Script" uid="uid://sf4w5fonudsq" path="res://audio_player.gd" id="1_f1804"]
+[ext_resource type="AudioStream" uid="uid://dlqamruo8li2i" path="res://sounds/beep.ogg" id="2_nlbx0"]
+
+[node name="AudioPlayer" type="Node"]
+script = ExtResource("1_f1804")
+
+[node name="Beep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_nlbx0")
