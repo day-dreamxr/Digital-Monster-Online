@@ -82,3 +82,20 @@ func save_preferences() -> Error:
 	}))
 	saved.emit()
 	return OK
+
+func export_save_data() -> void:
+	var save_data = {
+		"body_color": body_color.to_html(),
+		"cage_color": cage_color.to_html(),
+		"background_color": background_color.to_html(),
+		"screen_background_index": screen_background_index,
+	}
+	var json = JSON.stringify(save_data)
+	if OS.has_feature("web"):
+		JavaScriptBridge.download_buffer(json.to_utf8_buffer(), "save_data.json", "application/json")
+	else:
+		var file := FileAccess.open("user://save_data.json", FileAccess.WRITE)
+		file.store_string(json)
+		file.close()
+		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://save_data.json"))
+	

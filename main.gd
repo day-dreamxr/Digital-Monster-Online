@@ -56,3 +56,6 @@ func _on_cycle_screen_background_pressed() -> void:
 	$ScreenBackground.texture = load(screen_bg_paths[SaveData.screen_background_index])
 	SaveData.save_when_ready()
 	screen_background_index_changed.emit(SaveData.screen_background_index)
+
+func _on_export_button_pressed() -> void:
+	SaveData.export_save_data()

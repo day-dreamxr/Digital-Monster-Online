@@ -141,7 +141,7 @@ anchor_right = 1.0
 offset_left = -950.47614
 offset_top = 3.8095233
 offset_right = -742.7584
-offset_bottom = 227.63904
+offset_bottom = 272.40494
 grow_horizontal = 0
 scale = Vector2(4.510236, 4.510236)
 size_flags_vertical = 4
@@ -254,7 +254,11 @@ layout_mode = 2
 text = "Cycle Screen
 Background"
 
-[node name="Button" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
+[node name="ExportButton" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
+layout_mode = 2
+text = "Export Save Data"
+
+[node name="CloseButton" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 text = "Close"
 
@@ -267,4 +271,5 @@ text = "Close"
 [connection signal="color_changed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/BackgroundColor/Control/BackgroundColorPicker" to="." method="_on_background_color_changed"]
 [connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/CycleScreenBackground" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/CycleScreenBackground" to="." method="_on_cycle_screen_background_pressed"]
-[connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/Button" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/ExportButton" to="." method="_on_export_button_pressed"]
+[connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
