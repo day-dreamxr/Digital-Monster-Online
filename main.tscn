@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bct4c58g14yqa"]
+[gd_scene load_steps=4 format=3 uid="uid://bct4c58g14yqa"]
 
 [ext_resource type="Script" uid="uid://cy8mwlux2rpy1" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://dimwuqcfq6f77" path="res://sprites/ui/digivice.png" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://b0ivh17gklobc" path="res://sprites/ui/digivice.png" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://c3e327e5hafnd" path="res://sprites/ui/cage.png" id="3_1bvp3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
@@ -20,11 +21,29 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("1_ig7tw")
+texture = ExtResource("2_h2yge")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="Control" type="Control" parent="Digivice"]
+[node name="Cage" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -386.94446
+offset_top = -280.0
+offset_right = 386.94446
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_1bvp3")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Control" type="Control" parent="Cage"]
 layout_mode = 1
 anchor_left = 0.84200007
 anchor_top = 0.202
@@ -35,7 +54,7 @@ offset_top = -0.12000275
 offset_right = 63.329956
 offset_bottom = 329.88
 
-[node name="A" type="TextureButton" parent="Digivice/Control"]
+[node name="A" type="TextureButton" parent="Cage/Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -45,7 +64,7 @@ offset_right = 28.5
 offset_bottom = 62.0
 grow_horizontal = 2
 
-[node name="B" type="TextureButton" parent="Digivice/Control"]
+[node name="B" type="TextureButton" parent="Cage/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -59,7 +78,7 @@ offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="C" type="TextureButton" parent="Digivice/Control"]
+[node name="C" type="TextureButton" parent="Cage/Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -72,6 +91,6 @@ offset_right = 29.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[connection signal="pressed" from="Digivice/Control/A" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Digivice/Control/B" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Digivice/Control/C" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Cage/Control/A" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Cage/Control/B" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Cage/Control/C" to="." method="_on_button_pressed"]

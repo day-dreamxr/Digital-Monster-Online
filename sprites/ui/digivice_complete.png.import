@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0ivh17gklobc"
-path="res://.godot/imported/digivice.png-de24868008de0c8c7747cecb7b21cabd.ctex"
+uid="uid://dimwuqcfq6f77"
+path="res://.godot/imported/digivice_complete.png-cf9d2a41abb54ae94aef105407799df3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/digivice.png"
-dest_files=["res://.godot/imported/digivice.png-de24868008de0c8c7747cecb7b21cabd.ctex"]
+source_file="res://sprites/ui/digivice_complete.png"
+dest_files=["res://.godot/imported/digivice_complete.png-cf9d2a41abb54ae94aef105407799df3.ctex"]
 
 [params]
 
