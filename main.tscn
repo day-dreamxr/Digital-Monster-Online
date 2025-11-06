@@ -136,33 +136,50 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -820.9524
+offset_left = -950.47614
 offset_top = 3.8095233
-offset_right = -641.9524
-offset_bottom = 161.80952
+offset_right = -742.7584
+offset_bottom = 227.63904
 grow_horizontal = 0
 scale = Vector2(4.510236, 4.510236)
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Options"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control/Options"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Control/Options/VBoxContainer"]
+[node name="Control" type="Control" parent="UI/Control/Options/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Options/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.189285
+offset_top = -108.0
+offset_right = 91.189285
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Options"
 
-[node name="BodyColor" type="HBoxContainer" parent="UI/Control/Options/VBoxContainer"]
+[node name="BodyColor" type="HBoxContainer" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Control/Options/VBoxContainer/BodyColor"]
+[node name="Label" type="Label" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/BodyColor"]
 layout_mode = 2
 text = "Body Color"
 
-[node name="Control" type="Control" parent="UI/Control/Options/VBoxContainer/BodyColor"]
+[node name="Control" type="Control" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/BodyColor"]
 layout_mode = 2
 
-[node name="BodyColorPicker" type="ColorPickerButton" parent="UI/Control/Options/VBoxContainer/BodyColor/Control"]
+[node name="BodyColorPicker" type="ColorPickerButton" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/BodyColor/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 6
@@ -170,25 +187,25 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 64.0
+offset_left = 68.64554
 offset_top = -11.5
-offset_right = 72.0
+offset_right = 76.64554
 offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(2.9199998, 1)
 
-[node name="CageColor" type="HBoxContainer" parent="UI/Control/Options/VBoxContainer"]
+[node name="CageColor" type="HBoxContainer" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Control/Options/VBoxContainer/CageColor"]
+[node name="Label" type="Label" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/CageColor"]
 layout_mode = 2
 text = "Cage Color"
 
-[node name="Control" type="Control" parent="UI/Control/Options/VBoxContainer/CageColor"]
+[node name="Control" type="Control" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/CageColor"]
 layout_mode = 2
 
-[node name="CageColorPicker" type="ColorPickerButton" parent="UI/Control/Options/VBoxContainer/CageColor/Control"]
+[node name="CageColorPicker" type="ColorPickerButton" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/CageColor/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 6
@@ -196,25 +213,25 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 66.0
+offset_left = 70.64548
 offset_top = -11.5
-offset_right = 74.0
+offset_right = 78.64548
 offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(2.9199998, 1)
 
-[node name="BackgroundColor" type="HBoxContainer" parent="UI/Control/Options/VBoxContainer"]
+[node name="BackgroundColor" type="HBoxContainer" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Control/Options/VBoxContainer/BackgroundColor"]
+[node name="Label" type="Label" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/BackgroundColor"]
 layout_mode = 2
 text = "Background Color"
 
-[node name="Control" type="Control" parent="UI/Control/Options/VBoxContainer/BackgroundColor"]
+[node name="Control" type="Control" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/BackgroundColor"]
 layout_mode = 2
 
-[node name="BackgroundColorPicker" type="ColorPickerButton" parent="UI/Control/Options/VBoxContainer/BackgroundColor/Control"]
+[node name="BackgroundColorPicker" type="ColorPickerButton" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/BackgroundColor/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 6
@@ -222,20 +239,20 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 10.0
+offset_left = 14.645416
 offset_top = -11.5
-offset_right = 18.0
+offset_right = 22.645416
 offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(2.9199998, 1)
 
-[node name="CycleScreenBackground" type="Button" parent="UI/Control/Options/VBoxContainer"]
+[node name="CycleScreenBackground" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 text = "Cycle Screen
 Background"
 
-[node name="Button" type="Button" parent="UI/Control/Options/VBoxContainer"]
+[node name="Button" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 text = "Close"
 
@@ -243,8 +260,9 @@ text = "Close"
 [connection signal="pressed" from="Cage/Control/B" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Cage/Control/C" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="UI/Control/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="color_changed" from="UI/Control/Options/VBoxContainer/BodyColor/Control/BodyColorPicker" to="." method="_on_body_color_changed"]
-[connection signal="color_changed" from="UI/Control/Options/VBoxContainer/CageColor/Control/CageColorPicker" to="." method="_on_cage_color_changed"]
-[connection signal="color_changed" from="UI/Control/Options/VBoxContainer/BackgroundColor/Control/BackgroundColorPicker" to="." method="_on_background_color_changed"]
-[connection signal="pressed" from="UI/Control/Options/VBoxContainer/CycleScreenBackground" to="." method="_on_cycle_screen_background_pressed"]
-[connection signal="pressed" from="UI/Control/Options/VBoxContainer/Button" to="." method="_on_close_button_pressed"]
+[connection signal="color_changed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/BodyColor/Control/BodyColorPicker" to="." method="_on_body_color_changed"]
+[connection signal="color_changed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/CageColor/Control/CageColorPicker" to="." method="_on_cage_color_changed"]
+[connection signal="color_changed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/BackgroundColor/Control/BackgroundColorPicker" to="." method="_on_background_color_changed"]
+[connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/CycleScreenBackground" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/CycleScreenBackground" to="." method="_on_cycle_screen_background_pressed"]
+[connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/Button" to="." method="_on_close_button_pressed"]

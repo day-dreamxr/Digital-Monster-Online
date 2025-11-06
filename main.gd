@@ -49,6 +49,7 @@ func _on_close_button_pressed() -> void:
 	%Options.hide()
 
 func _on_cycle_screen_background_pressed() -> void:
+	
 	SaveData.screen_background_index += 1
 	if SaveData.screen_background_index >= len(screen_bg_paths):
 		SaveData.screen_background_index = 0
