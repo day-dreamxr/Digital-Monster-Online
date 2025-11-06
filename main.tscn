@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bct4c58g14yqa"]
+[gd_scene load_steps=5 format=3 uid="uid://bct4c58g14yqa"]
 
 [ext_resource type="Script" uid="uid://cy8mwlux2rpy1" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://b0ivh17gklobc" path="res://sprites/ui/digivice.png" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://cihgw5ts6mp1u" path="res://sprites/ui/body.png" id="2_h2yge"]
 [ext_resource type="Texture2D" uid="uid://c3e327e5hafnd" path="res://sprites/ui/cage.png" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://drjl3ejflvq5q" path="res://sprites/ui/options.png" id="4_1bvp3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
 
 [node name="Digivice" type="TextureRect" parent="."]
+modulate = Color(0.5803922, 0.21960784, 0.18039216, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -26,6 +28,7 @@ expand_mode = 3
 stretch_mode = 4
 
 [node name="Cage" type="TextureRect" parent="."]
+modulate = Color(0.5019608, 0.5019608, 0.5019608, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -91,6 +94,144 @@ offset_right = 29.5
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -24.0
+offset_top = 4.0000005
+offset_right = 16.0
+offset_bottom = 44.0
+grow_horizontal = 0
+scale = Vector2(0.525, 0.525)
+
+[node name="OptionsButton" type="TextureButton" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_bottom = 100.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_1bvp3")
+
+[node name="Options" type="Window" parent="."]
+transparent_bg = true
+oversampling_override = 1.0
+position = Vector2i(639, 16)
+size = Vector2i(500, 500)
+visible = false
+borderless = true
+transparent = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Options"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_right = -1.0
+offset_bottom = 104.0
+grow_horizontal = 0
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Options"
+
+[node name="BodyColor" type="HBoxContainer" parent="Options/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options/PanelContainer/VBoxContainer/BodyColor"]
+layout_mode = 2
+text = "Body Color"
+
+[node name="Control" type="Control" parent="Options/PanelContainer/VBoxContainer/BodyColor"]
+layout_mode = 2
+
+[node name="BodyColorPicker" type="ColorPickerButton" parent="Options/PanelContainer/VBoxContainer/BodyColor/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = -11.5
+offset_right = 72.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2.9199998, 1)
+
+[node name="CageColor" type="HBoxContainer" parent="Options/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options/PanelContainer/VBoxContainer/CageColor"]
+layout_mode = 2
+text = "Cage Color"
+
+[node name="Control" type="Control" parent="Options/PanelContainer/VBoxContainer/CageColor"]
+layout_mode = 2
+
+[node name="CageColorPicker" type="ColorPickerButton" parent="Options/PanelContainer/VBoxContainer/CageColor/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 66.0
+offset_top = -11.5
+offset_right = 74.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2.9199998, 1)
+
+[node name="BackgroundColor" type="HBoxContainer" parent="Options/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options/PanelContainer/VBoxContainer/BackgroundColor"]
+layout_mode = 2
+text = "Background Color"
+
+[node name="Control" type="Control" parent="Options/PanelContainer/VBoxContainer/BackgroundColor"]
+layout_mode = 2
+
+[node name="BackgroundColorPicker" type="ColorPickerButton" parent="Options/PanelContainer/VBoxContainer/BackgroundColor/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -11.5
+offset_right = 18.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2.9199998, 1)
+
+[node name="Button" type="Button" parent="Options/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Close"
+
 [connection signal="pressed" from="Cage/Control/A" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Cage/Control/B" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Cage/Control/C" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="UI/Control/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="color_changed" from="Options/PanelContainer/VBoxContainer/BodyColor/Control/BodyColorPicker" to="." method="_on_body_color_changed"]
+[connection signal="color_changed" from="Options/PanelContainer/VBoxContainer/CageColor/Control/CageColorPicker" to="." method="_on_cage_color_changed"]
+[connection signal="color_changed" from="Options/PanelContainer/VBoxContainer/BackgroundColor/Control/BackgroundColorPicker" to="." method="_on_background_color_changed"]
+[connection signal="pressed" from="Options/PanelContainer/VBoxContainer/Button" to="." method="_on_close_button_pressed"]
