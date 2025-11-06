@@ -118,44 +118,40 @@ offset_bottom = 100.0
 grow_horizontal = 0
 texture_normal = ExtResource("4_1bvp3")
 
-[node name="Options" type="Window" parent="."]
-transparent_bg = true
-oversampling_override = 1.0
-position = Vector2i(639, 16)
-size = Vector2i(500, 500)
+[node name="Options" type="PanelContainer" parent="UI/Control"]
+unique_name_in_owner = true
 visible = false
-borderless = true
-transparent = true
-
-[node name="PanelContainer" type="PanelContainer" parent="Options"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -180.0
-offset_right = -1.0
-offset_bottom = 104.0
+offset_left = -820.9524
+offset_top = 3.8095233
+offset_right = -641.9524
+offset_bottom = 161.80952
 grow_horizontal = 0
+scale = Vector2(4.510236, 4.510236)
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Options/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Options"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Options/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/Control/Options/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Options"
 
-[node name="BodyColor" type="HBoxContainer" parent="Options/PanelContainer/VBoxContainer"]
+[node name="BodyColor" type="HBoxContainer" parent="UI/Control/Options/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Options/PanelContainer/VBoxContainer/BodyColor"]
+[node name="Label" type="Label" parent="UI/Control/Options/VBoxContainer/BodyColor"]
 layout_mode = 2
 text = "Body Color"
 
-[node name="Control" type="Control" parent="Options/PanelContainer/VBoxContainer/BodyColor"]
+[node name="Control" type="Control" parent="UI/Control/Options/VBoxContainer/BodyColor"]
 layout_mode = 2
 
-[node name="BodyColorPicker" type="ColorPickerButton" parent="Options/PanelContainer/VBoxContainer/BodyColor/Control"]
+[node name="BodyColorPicker" type="ColorPickerButton" parent="UI/Control/Options/VBoxContainer/BodyColor/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 6
@@ -171,17 +167,17 @@ grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(2.9199998, 1)
 
-[node name="CageColor" type="HBoxContainer" parent="Options/PanelContainer/VBoxContainer"]
+[node name="CageColor" type="HBoxContainer" parent="UI/Control/Options/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Options/PanelContainer/VBoxContainer/CageColor"]
+[node name="Label" type="Label" parent="UI/Control/Options/VBoxContainer/CageColor"]
 layout_mode = 2
 text = "Cage Color"
 
-[node name="Control" type="Control" parent="Options/PanelContainer/VBoxContainer/CageColor"]
+[node name="Control" type="Control" parent="UI/Control/Options/VBoxContainer/CageColor"]
 layout_mode = 2
 
-[node name="CageColorPicker" type="ColorPickerButton" parent="Options/PanelContainer/VBoxContainer/CageColor/Control"]
+[node name="CageColorPicker" type="ColorPickerButton" parent="UI/Control/Options/VBoxContainer/CageColor/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 6
@@ -197,17 +193,17 @@ grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(2.9199998, 1)
 
-[node name="BackgroundColor" type="HBoxContainer" parent="Options/PanelContainer/VBoxContainer"]
+[node name="BackgroundColor" type="HBoxContainer" parent="UI/Control/Options/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Options/PanelContainer/VBoxContainer/BackgroundColor"]
+[node name="Label" type="Label" parent="UI/Control/Options/VBoxContainer/BackgroundColor"]
 layout_mode = 2
 text = "Background Color"
 
-[node name="Control" type="Control" parent="Options/PanelContainer/VBoxContainer/BackgroundColor"]
+[node name="Control" type="Control" parent="UI/Control/Options/VBoxContainer/BackgroundColor"]
 layout_mode = 2
 
-[node name="BackgroundColorPicker" type="ColorPickerButton" parent="Options/PanelContainer/VBoxContainer/BackgroundColor/Control"]
+[node name="BackgroundColorPicker" type="ColorPickerButton" parent="UI/Control/Options/VBoxContainer/BackgroundColor/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 6
@@ -223,7 +219,7 @@ grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(2.9199998, 1)
 
-[node name="Button" type="Button" parent="Options/PanelContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="UI/Control/Options/VBoxContainer"]
 layout_mode = 2
 text = "Close"
 
@@ -231,7 +227,7 @@ text = "Close"
 [connection signal="pressed" from="Cage/Control/B" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Cage/Control/C" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="UI/Control/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="color_changed" from="Options/PanelContainer/VBoxContainer/BodyColor/Control/BodyColorPicker" to="." method="_on_body_color_changed"]
-[connection signal="color_changed" from="Options/PanelContainer/VBoxContainer/CageColor/Control/CageColorPicker" to="." method="_on_cage_color_changed"]
-[connection signal="color_changed" from="Options/PanelContainer/VBoxContainer/BackgroundColor/Control/BackgroundColorPicker" to="." method="_on_background_color_changed"]
-[connection signal="pressed" from="Options/PanelContainer/VBoxContainer/Button" to="." method="_on_close_button_pressed"]
+[connection signal="color_changed" from="UI/Control/Options/VBoxContainer/BodyColor/Control/BodyColorPicker" to="." method="_on_body_color_changed"]
+[connection signal="color_changed" from="UI/Control/Options/VBoxContainer/CageColor/Control/CageColorPicker" to="." method="_on_cage_color_changed"]
+[connection signal="color_changed" from="UI/Control/Options/VBoxContainer/BackgroundColor/Control/BackgroundColorPicker" to="." method="_on_background_color_changed"]
+[connection signal="pressed" from="UI/Control/Options/VBoxContainer/Button" to="." method="_on_close_button_pressed"]

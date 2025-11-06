@@ -16,7 +16,7 @@ func _on_button_pressed() -> void:
 	AudioPlayer.beep.play()
 
 func _on_options_button_pressed() -> void:
-	$Options.show()
+	%Options.show()
 
 func _on_body_color_changed(color: Color) -> void:
 	$Digivice.modulate = color
@@ -37,4 +37,4 @@ func _on_background_color_changed(color: Color) -> void:
 	background_color_changed.emit(color)
 
 func _on_close_button_pressed() -> void:
-	$Options.hide()
+	%Options.hide()
