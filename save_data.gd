@@ -1,4 +1,6 @@
 extends Node
+# Based on 'preferences.gd' from https://github.com/boardshapes/boardwalk
+# Thank you to https://github.com/jaredtalbot from Boardshapes for the original version of this file
 
 var body_color := Color():
 	set(value):
@@ -82,3 +84,28 @@ func save_preferences() -> Error:
 	}))
 	saved.emit()
 	return OK
+
+func export_save_data() -> void:
+	var save_data = {
+		"body_color": body_color.to_html(),
+		"cage_color": cage_color.to_html(),
+		"background_color": background_color.to_html(),
+		"screen_background_index": screen_background_index,
+	}
+	var json = JSON.stringify(save_data)
+	if OS.has_feature("web"):
+		JavaScriptBridge.download_buffer(json.to_utf8_buffer(), "save_data.json", "application/json")
+	else:
+		var file := FileAccess.open("user://save_data.json", FileAccess.WRITE)
+		file.store_string(json)
+		file.close()
+		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://save_data.json"))
+	
+func import_save_data(content: PackedByteArray):
+	var json = JSON.parse_string(content.get_string_from_utf8())
+	if json is Dictionary:
+		body_color = Color.html(json.get("body_color", body_color))
+		cage_color = Color.html(json.get("cage_color", cage_color))
+		background_color = Color.html(json.get("background_color", background_color))
+		screen_background_index = json.get("screen_background_index", screen_background_index)
+	save_preferences()
