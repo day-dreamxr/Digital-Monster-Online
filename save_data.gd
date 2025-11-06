@@ -15,11 +15,17 @@ var background_color := Color():
 		background_color = value
 		background_color_changed.emit(background_color)
 
+var screen_background_index := int():
+	set(value):
+		screen_background_index = value
+		screen_background_index_changed.emit(value)
+
 var save_timer: Timer
 
 signal body_color_changed(new_value: Color)
 signal cage_color_changed(new_value: Color)
 signal background_color_changed(new_value: Color)
+signal screen_background_index_changed(new_value: int)
 signal saved
 
 func _ready():
@@ -47,6 +53,7 @@ func load_preferences() -> Error:
 			body_color = Color(1, 1, 1, 1)
 			cage_color = Color(1, 1, 1, 1)
 			background_color = Color(0, 0, 0, 1)
+			screen_background_index = 0
 			save_preferences()
 			return OK
 		return err
@@ -56,6 +63,7 @@ func load_preferences() -> Error:
 		body_color = Color.html(json.get("body_color", body_color))
 		cage_color = Color.html(json.get("cage_color", cage_color))
 		background_color = Color.html(json.get("background_color", background_color))
+		screen_background_index = json.get("screen_background_index", screen_background_index)
 	else:
 		save_preferences()
 	return OK
@@ -70,6 +78,7 @@ func save_preferences() -> Error:
 		"body_color": body_color.to_html(),
 		"cage_color": cage_color.to_html(),
 		"background_color": background_color.to_html(),
+		"screen_background_index": screen_background_index,
 	}))
 	saved.emit()
 	return OK

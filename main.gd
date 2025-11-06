@@ -1,8 +1,16 @@
 extends Node
 
+const screen_bg_paths = ["res://sprites/backgrounds/grasslands.png",
+	"res://sprites/backgrounds/desert.png",
+	"res://sprites/backgrounds/forest.png",
+	"res://sprites/backgrounds/mountains.png",
+	"res://sprites/backgrounds/beach.png",
+	"res://sprites/backgrounds/office.png"]
+
 signal body_color_changed(new_value: Color)
 signal cage_color_changed(new_value: Color)
 signal background_color_changed(new_value: Color)
+signal screen_background_index_changed(new_value: int)
 
 func _ready() -> void:
 	$Digivice.modulate = SaveData.body_color
@@ -11,6 +19,7 @@ func _ready() -> void:
 	%CageColorPicker.color = SaveData.cage_color
 	RenderingServer.set_default_clear_color(SaveData.background_color)
 	%BackgroundColorPicker.color = SaveData.background_color
+	$ScreenBackground.texture = load(screen_bg_paths[SaveData.screen_background_index])
 
 func _on_button_pressed() -> void:
 	AudioPlayer.beep.play()
@@ -38,3 +47,11 @@ func _on_background_color_changed(color: Color) -> void:
 
 func _on_close_button_pressed() -> void:
 	%Options.hide()
+
+func _on_cycle_screen_background_pressed() -> void:
+	SaveData.screen_background_index += 1
+	if SaveData.screen_background_index >= len(screen_bg_paths):
+		SaveData.screen_background_index = 0
+	$ScreenBackground.texture = load(screen_bg_paths[SaveData.screen_background_index])
+	SaveData.save_when_ready()
+	screen_background_index_changed.emit(SaveData.screen_background_index)

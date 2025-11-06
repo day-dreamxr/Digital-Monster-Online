@@ -8,6 +8,17 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
 
+[node name="ScreenBackground" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_left = 0.25300002
+anchor_top = 0.289
+anchor_right = 0.25300002
+anchor_bottom = 0.289
+offset_left = -1.4560242
+offset_top = -0.27200317
+offset_right = 267.54398
+offset_bottom = 268.728
+
 [node name="Digivice" type="TextureRect" parent="."]
 modulate = Color(0.5803922, 0.21960784, 0.18039216, 1)
 anchors_preset = 8
@@ -219,6 +230,11 @@ grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(2.9199998, 1)
 
+[node name="CycleScreenBackground" type="Button" parent="UI/Control/Options/VBoxContainer"]
+layout_mode = 2
+text = "Cycle Screen
+Background"
+
 [node name="Button" type="Button" parent="UI/Control/Options/VBoxContainer"]
 layout_mode = 2
 text = "Close"
@@ -230,4 +246,5 @@ text = "Close"
 [connection signal="color_changed" from="UI/Control/Options/VBoxContainer/BodyColor/Control/BodyColorPicker" to="." method="_on_body_color_changed"]
 [connection signal="color_changed" from="UI/Control/Options/VBoxContainer/CageColor/Control/CageColorPicker" to="." method="_on_cage_color_changed"]
 [connection signal="color_changed" from="UI/Control/Options/VBoxContainer/BackgroundColor/Control/BackgroundColorPicker" to="." method="_on_background_color_changed"]
+[connection signal="pressed" from="UI/Control/Options/VBoxContainer/CycleScreenBackground" to="." method="_on_cycle_screen_background_pressed"]
 [connection signal="pressed" from="UI/Control/Options/VBoxContainer/Button" to="." method="_on_close_button_pressed"]
