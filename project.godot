@@ -11,5 +11,14 @@ config_version=5
 [application]
 
 config/name="Digital Monster Online"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+AudioPlayer="*res://audio_player.tscn"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(1, 1, 1, 1)
