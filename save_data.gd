@@ -1,4 +1,5 @@
 extends Node
+# Based on 'preferences.gd' from https://github.com/boardshapes/boardwalk
 # Thank you to https://github.com/jaredtalbot from Boardshapes for the original version of this file
 
 var body_color := Color():
