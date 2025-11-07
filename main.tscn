@@ -1,10 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bct4c58g14yqa"]
+[gd_scene load_steps=16 format=3 uid="uid://bct4c58g14yqa"]
 
 [ext_resource type="Script" uid="uid://cy8mwlux2rpy1" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://b4b6rvhloaega" path="res://sprites/ui/buttons/health.png" id="2_7mycd"]
+[ext_resource type="Texture2D" uid="uid://cicpt2e8h0rj7" path="res://sprites/ui/buttons/health_gray.png" id="2_272bh"]
 [ext_resource type="Texture2D" uid="uid://cihgw5ts6mp1u" path="res://sprites/ui/body.png" id="2_h2yge"]
 [ext_resource type="Texture2D" uid="uid://c3e327e5hafnd" path="res://sprites/ui/cage.png" id="3_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://drjl3ejflvq5q" path="res://sprites/ui/options.png" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://0jdvs34mnbor" path="res://sprites/ui/buttons/feed_gray.png" id="4_vivmo"]
+[ext_resource type="Texture2D" uid="uid://bykpjg16ev1x3" path="res://sprites/ui/buttons/feed.png" id="5_2cqfq"]
 [ext_resource type="Script" uid="uid://cdau41ruidjsy" path="res://web_file_dialog.gd" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://c117g5y0v0b24" path="res://sprites/ui/buttons/train_gray.png" id="6_yaehf"]
+[ext_resource type="Texture2D" uid="uid://bsjjoh6wgps2n" path="res://sprites/ui/buttons/train.png" id="7_074og"]
+[ext_resource type="Texture2D" uid="uid://57evn3byb1dv" path="res://sprites/ui/buttons/battle_gray.png" id="8_cegan"]
+[ext_resource type="Texture2D" uid="uid://dixkvwe4dui73" path="res://sprites/ui/buttons/battle.png" id="9_82xsv"]
+[ext_resource type="Texture2D" uid="uid://ciw2op5nxa1ki" path="res://sprites/ui/buttons/flush_gray.png" id="10_getpj"]
+[ext_resource type="Texture2D" uid="uid://b20qurp3wnuh4" path="res://sprites/ui/buttons/flush.png" id="11_ryguw"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
@@ -21,6 +31,44 @@ offset_right = -16.5
 offset_bottom = 132.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenBackground"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.75
+offset_right = 133.75
+offset_bottom = 40.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Health" type="TextureButton" parent="ScreenBackground/HBoxContainer"]
+layout_mode = 2
+action_mode = 0
+button_mask = 0
+texture_normal = ExtResource("2_272bh")
+texture_focused = ExtResource("2_7mycd")
+
+[node name="Feed" type="TextureButton" parent="ScreenBackground/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_vivmo")
+texture_focused = ExtResource("5_2cqfq")
+
+[node name="Train" type="TextureButton" parent="ScreenBackground/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_yaehf")
+texture_focused = ExtResource("7_074og")
+
+[node name="Battle" type="TextureButton" parent="ScreenBackground/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_cegan")
+texture_focused = ExtResource("9_82xsv")
+
+[node name="Flush" type="TextureButton" parent="ScreenBackground/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("10_getpj")
+texture_focused = ExtResource("11_ryguw")
 
 [node name="Digivice" type="TextureRect" parent="."]
 modulate = Color(0.5803922, 0.21960784, 0.18039216, 1)
@@ -73,38 +121,42 @@ offset_bottom = 329.88
 
 [node name="A" type="TextureButton" parent="Cage/Control"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
+anchor_top = 0.006
 anchor_right = 0.5
+anchor_bottom = 0.006
 offset_left = -30.5
-offset_right = 28.5
-offset_bottom = 62.0
+offset_top = 0.01999998
+offset_right = 30.5
+offset_bottom = 61.02
 grow_horizontal = 2
 
 [node name="B" type="TextureButton" parent="Cage/Control"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.508
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.508
 anchor_bottom = 0.5
-offset_left = -29.5
-offset_top = -31.0
-offset_right = 29.5
+offset_left = -30.004002
+offset_top = -30.0
+offset_right = 29.995998
 offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="C" type="TextureButton" parent="Cage/Control"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.99700004
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -29.5
-offset_top = -62.0
-offset_right = 29.5
+anchor_bottom = 0.99700004
+offset_left = -30.5
+offset_top = -61.01001
+offset_right = 30.5
+offset_bottom = -0.010009766
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -275,7 +327,7 @@ script = ExtResource("5_lquwl")
 
 [node name="SaveDataPicker" type="FileDialog" parent="."]
 oversampling_override = 1.0
-title = "Import Save Data"
+title = "Open a File"
 initial_position = 1
 size = Vector2i(1015, 565)
 file_mode = 0
@@ -283,6 +335,7 @@ access = 2
 filters = PackedStringArray("*.json", "application/json")
 folder_creation_enabled = false
 
+[connection signal="pressed" from="Cage/Control/A" to="." method="_on_a_pressed"]
 [connection signal="pressed" from="Cage/Control/A" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Cage/Control/B" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Cage/Control/C" to="." method="_on_button_pressed"]

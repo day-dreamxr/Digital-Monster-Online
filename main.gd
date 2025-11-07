@@ -12,6 +12,9 @@ signal cage_color_changed(new_value: Color)
 signal background_color_changed(new_value: Color)
 signal screen_background_index_changed(new_value: int)
 
+@onready var buttons: Array[TextureButton] = [$ScreenBackground/HBoxContainer/Health, $ScreenBackground/HBoxContainer/Feed, $ScreenBackground/HBoxContainer/Train, $ScreenBackground/HBoxContainer/Battle, $ScreenBackground/HBoxContainer/Flush]
+@onready var focus_index = 0
+
 func _ready() -> void:
 	SaveData.saved.connect(reload_colors)
 	reload_colors()
@@ -27,6 +30,8 @@ func reload_colors() -> void:
 
 func _on_button_pressed() -> void:
 	AudioPlayer.beep.play()
+
+
 
 func _on_options_button_pressed() -> void:
 	%Options.show()
@@ -81,3 +86,9 @@ func _on_save_data_selected(path: String) -> Error:
 
 func _on_web_save_data_picker_file_loaded(content: PackedByteArray, filename: String) -> void:
 	SaveData.import_save_data(content)
+
+func _on_a_pressed() -> void:
+	buttons[focus_index].grab_focus()
+	focus_index += 1
+	if focus_index >= len(buttons):
+		focus_index = 0
