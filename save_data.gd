@@ -62,9 +62,9 @@ func load_preferences() -> Error:
 	
 	var json = JSON.parse_string(file.get_as_text())
 	if json is Dictionary:
-		body_color = Color.html(json.get("body_color", body_color))
-		cage_color = Color.html(json.get("cage_color", cage_color))
-		background_color = Color.html(json.get("background_color", background_color))
+		body_color = Color.html(json["body_color"]) if "body_color" in json else body_color
+		cage_color = Color.html(json["cage_color"]) if "cage_color" in json else body_color
+		background_color = Color.html(json["background_color"]) if "background_color" in json else body_color
 		screen_background_index = json.get("screen_background_index", screen_background_index)
 	else:
 		save_preferences()
