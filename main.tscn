@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bct4c58g14yqa"]
+[gd_scene load_steps=20 format=3 uid="uid://bct4c58g14yqa"]
 
 [ext_resource type="Script" uid="uid://cy8mwlux2rpy1" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://b4b6rvhloaega" path="res://sprites/ui/buttons/health.png" id="2_7mycd"]
@@ -15,6 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://dixkvwe4dui73" path="res://sprites/ui/buttons/battle.png" id="9_82xsv"]
 [ext_resource type="Texture2D" uid="uid://ciw2op5nxa1ki" path="res://sprites/ui/buttons/flush_gray.png" id="10_getpj"]
 [ext_resource type="Texture2D" uid="uid://b20qurp3wnuh4" path="res://sprites/ui/buttons/flush.png" id="11_ryguw"]
+[ext_resource type="Texture2D" uid="uid://cu1nvi73lmbh5" path="res://sprites/ui/buttons/arrow_gray.png" id="12_cegan"]
+[ext_resource type="Texture2D" uid="uid://dkcp3o25mte56" path="res://sprites/ui/buttons/arrow.png" id="13_82xsv"]
+[ext_resource type="Texture2D" uid="uid://b2e6r7pgb5jei" path="res://sprites/ui/buttons/food.png" id="14_getpj"]
+[ext_resource type="Texture2D" uid="uid://cil6odttp2wpx" path="res://sprites/ui/buttons/pill.png" id="15_ryguw"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
@@ -32,7 +36,8 @@ offset_bottom = 132.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScreenBackground"]
+[node name="TopButtons" type="HBoxContainer" parent="ScreenBackground"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -43,32 +48,261 @@ offset_bottom = 40.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="Health" type="TextureButton" parent="ScreenBackground/HBoxContainer"]
+[node name="Health" type="TextureButton" parent="ScreenBackground/TopButtons"]
 layout_mode = 2
 action_mode = 0
 button_mask = 0
 texture_normal = ExtResource("2_272bh")
 texture_focused = ExtResource("2_7mycd")
 
-[node name="Feed" type="TextureButton" parent="ScreenBackground/HBoxContainer"]
+[node name="Feed" type="TextureButton" parent="ScreenBackground/TopButtons"]
 layout_mode = 2
 texture_normal = ExtResource("4_vivmo")
 texture_focused = ExtResource("5_2cqfq")
 
-[node name="Train" type="TextureButton" parent="ScreenBackground/HBoxContainer"]
+[node name="Train" type="TextureButton" parent="ScreenBackground/TopButtons"]
 layout_mode = 2
 texture_normal = ExtResource("6_yaehf")
 texture_focused = ExtResource("7_074og")
 
-[node name="Battle" type="TextureButton" parent="ScreenBackground/HBoxContainer"]
+[node name="Battle" type="TextureButton" parent="ScreenBackground/TopButtons"]
 layout_mode = 2
 texture_normal = ExtResource("8_cegan")
 texture_focused = ExtResource("9_82xsv")
 
-[node name="Flush" type="TextureButton" parent="ScreenBackground/HBoxContainer"]
+[node name="Flush" type="TextureButton" parent="ScreenBackground/TopButtons"]
 layout_mode = 2
 texture_normal = ExtResource("10_getpj")
 texture_focused = ExtResource("11_ryguw")
+
+[node name="HealthMenu" type="TextureRect" parent="ScreenBackground"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.25
+offset_top = -134.25
+offset_right = 134.25
+offset_bottom = 134.25
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Name" type="Control" parent="ScreenBackground/HealthMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ScreenBackground/HealthMenu/Name"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -67.25
+offset_right = 131.0
+offset_bottom = -13.25
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Agumon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Age" type="Control" parent="ScreenBackground/HealthMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AgeSprite" type="Sprite2D" parent="ScreenBackground/HealthMenu/Age"]
+position = Vector2(37.25, 97.250015)
+texture = ExtResource("2_7mycd")
+
+[node name="AgeLabel" type="Label" parent="ScreenBackground/HealthMenu/Age"]
+layout_mode = 0
+offset_left = 150.25
+offset_top = 86.25
+offset_right = 243.25
+offset_bottom = 109.25
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "A"
+horizontal_alignment = 2
+
+[node name="WeightSprite" type="Sprite2D" parent="ScreenBackground/HealthMenu/Age"]
+position = Vector2(37.25, 173.25002)
+texture = ExtResource("5_2cqfq")
+
+[node name="WeightLabel" type="Label" parent="ScreenBackground/HealthMenu/Age"]
+layout_mode = 0
+offset_left = 150.25
+offset_top = 161.25002
+offset_right = 243.25
+offset_bottom = 184.25002
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "g"
+horizontal_alignment = 2
+
+[node name="Stats" type="VBoxContainer" parent="ScreenBackground/HealthMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HungryLabel" type="Label" parent="ScreenBackground/HealthMenu/Stats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Hungry"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HungryHearts" type="HBoxContainer" parent="ScreenBackground/HealthMenu/Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="1" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/HungryHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="2" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/HungryHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="3" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/HungryHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="4" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/HungryHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="StrengthLabel" type="Label" parent="ScreenBackground/HealthMenu/Stats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Strength"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StrengthHearts" type="HBoxContainer" parent="ScreenBackground/HealthMenu/Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="1" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/StrengthHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="2" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/StrengthHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="3" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/StrengthHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="4" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/StrengthHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="EffortLabel" type="Label" parent="ScreenBackground/HealthMenu/Stats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Effort"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EffortHearts" type="HBoxContainer" parent="ScreenBackground/HealthMenu/Stats"]
+layout_mode = 2
+alignment = 1
+
+[node name="1" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/EffortHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="2" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/EffortHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="3" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/EffortHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="4" type="TextureRect" parent="ScreenBackground/HealthMenu/Stats/EffortHearts"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+
+[node name="FeedMenu" type="TextureRect" parent="ScreenBackground"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScreenBackground/FeedMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -50.0
+offset_right = 132.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenBackground/FeedMenu/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FoodButton" type="TextureButton" parent="ScreenBackground/FeedMenu/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("12_cegan")
+texture_focused = ExtResource("13_82xsv")
+
+[node name="TextureRect" type="TextureRect" parent="ScreenBackground/FeedMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("14_getpj")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ScreenBackground/FeedMenu/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PillButton" type="TextureButton" parent="ScreenBackground/FeedMenu/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("12_cegan")
+texture_focused = ExtResource("13_82xsv")
+
+[node name="TextureRect" type="TextureRect" parent="ScreenBackground/FeedMenu/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("15_ryguw")
 
 [node name="Digivice" type="TextureRect" parent="."]
 modulate = Color(0.5803922, 0.21960784, 0.18039216, 1)
@@ -131,6 +365,7 @@ offset_top = 0.01999998
 offset_right = 30.5
 offset_bottom = 61.02
 grow_horizontal = 2
+action_mode = 0
 
 [node name="B" type="TextureButton" parent="Cage/Control"]
 layout_mode = 1
@@ -145,6 +380,7 @@ offset_right = 29.995998
 offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 
 [node name="C" type="TextureButton" parent="Cage/Control"]
 layout_mode = 1
@@ -159,6 +395,7 @@ offset_right = 30.5
 offset_bottom = -0.010009766
 grow_horizontal = 2
 grow_vertical = 0
+action_mode = 0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -335,9 +572,15 @@ access = 2
 filters = PackedStringArray("*.json", "application/json")
 folder_creation_enabled = false
 
+[connection signal="pressed" from="ScreenBackground/TopButtons/Health" to="." method="_on_health_pressed"]
+[connection signal="pressed" from="ScreenBackground/TopButtons/Feed" to="." method="_on_feed_pressed"]
+[connection signal="pressed" from="ScreenBackground/FeedMenu/VBoxContainer/HBoxContainer/FoodButton" to="." method="_on_food_button_pressed"]
+[connection signal="pressed" from="ScreenBackground/FeedMenu/VBoxContainer/HBoxContainer2/PillButton" to="." method="_on_pill_button_pressed"]
 [connection signal="pressed" from="Cage/Control/A" to="." method="_on_a_pressed"]
 [connection signal="pressed" from="Cage/Control/A" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Cage/Control/B" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Cage/Control/B" to="." method="_on_b_pressed"]
+[connection signal="pressed" from="Cage/Control/C" to="." method="_on_c_pressed"]
 [connection signal="pressed" from="Cage/Control/C" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="UI/Control/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="color_changed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/BodyColor/Control/BodyColorPicker" to="." method="_on_body_color_changed"]

@@ -12,8 +12,14 @@ signal cage_color_changed(new_value: Color)
 signal background_color_changed(new_value: Color)
 signal screen_background_index_changed(new_value: int)
 
-@onready var buttons: Array[TextureButton] = [$ScreenBackground/HBoxContainer/Health, $ScreenBackground/HBoxContainer/Feed, $ScreenBackground/HBoxContainer/Train, $ScreenBackground/HBoxContainer/Battle, $ScreenBackground/HBoxContainer/Flush]
-@onready var focus_index = 0
+@onready var buttons: Array[TextureButton] = [%TopButtons/Health, %TopButtons/Feed, %TopButtons/Train, %TopButtons/Battle, %TopButtons/Flush]
+@onready var focus_index = -1
+@onready var focused = false
+
+@onready var health_screens = [%HealthMenu/Name, %HealthMenu/Age, %HealthMenu/Stats]
+@onready var health_index = 0
+
+@onready var feed_focus = 0
 
 func _ready() -> void:
 	SaveData.saved.connect(reload_colors)
@@ -88,7 +94,73 @@ func _on_web_save_data_picker_file_loaded(content: PackedByteArray, filename: St
 	SaveData.import_save_data(content)
 
 func _on_a_pressed() -> void:
-	buttons[focus_index].grab_focus()
-	focus_index += 1
-	if focus_index >= len(buttons):
-		focus_index = 0
+	if %HealthMenu.visible:
+		health_screens[health_index].hide()
+		health_index += 1
+		if health_index >= len(health_screens):
+			health_index = 0
+			health_screens[health_index].show()
+			%HealthMenu.hide()
+			%TopButtons.show()
+		else:
+			health_screens[health_index].show()
+	elif %FeedMenu.visible:
+		if feed_focus == 0:
+			feed_focus = 1
+			%PillButton.grab_focus()
+		else:
+			feed_focus = 0
+			%FoodButton.grab_focus()
+	else:
+		focus_index += 1
+		
+		if focus_index >= len(buttons):
+			focused = false
+			focus_index = -1
+		else:
+			focused = true
+			buttons[focus_index].grab_focus()
+
+func _on_health_pressed() -> void:
+	%TopButtons.hide()
+	%HealthMenu.show()
+
+func _on_feed_pressed() -> void:
+	%TopButtons.hide()
+	%FeedMenu.show()
+	%FoodButton.grab_focus()
+
+func _on_b_pressed() -> void:
+	if %TopButtons.visible:
+		if focused:
+			buttons[focus_index].pressed.emit()
+			focused = false
+			focus_index = -1
+		else:
+			pass
+			#show the clock
+	elif %FeedMenu.visible:
+		if feed_focus == 0:
+			%FoodButton.pressed.emit()
+		else:
+			%PillButton.pressed.emit()
+
+func _on_c_pressed() -> void:
+	if %TopButtons.visible:
+		focused = false
+		focus_index = -1
+	elif %HealthMenu.visible:
+		health_index = 0
+		health_screens[health_index].show()
+		%HealthMenu.hide()
+		%TopButtons.show()
+	elif %FeedMenu.visible:
+		%TopButtons.show()
+		%FeedMenu.hide()
+
+func _on_food_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_pill_button_pressed() -> void:
+	pass # Replace with function body.
