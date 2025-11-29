@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://gb0n6cvoq08r"]
+
+[ext_resource type="Script" uid="uid://cthyiiipmq3s1" path="res://digimon/digimon.gd" id="1_36ab2"]
+[ext_resource type="Texture2D" uid="uid://dd6sgp2dii64y" path="res://digimon/botamon/sprites/1.png" id="1_tfd0m"]
+[ext_resource type="Texture2D" uid="uid://x412sq5w6gl8" path="res://digimon/botamon/sprites/0.png" id="2_vooej"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl8h7"]
+atlas = ExtResource("1_tfd0m")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eq57u"]
+atlas = ExtResource("1_tfd0m")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psxhm"]
+atlas = ExtResource("2_vooej")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eu4ne"]
+atlas = ExtResource("1_tfd0m")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0j765"]
+atlas = ExtResource("1_tfd0m")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tp3k"]
+atlas = ExtResource("1_tfd0m")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1mnds"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl8h7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eq57u")
+}],
+"loop": true,
+"name": &"eating",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psxhm")
+}],
+"loop": true,
+"name": &"egg",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eu4ne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0j765")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tp3k")
+}],
+"loop": true,
+"name": &"sleeping",
+"speed": 5.0
+}]
+
+[node name="Digimon" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_1mnds")
+animation = &"idle"
+script = ExtResource("1_36ab2")
+
+[node name="EvolutionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HungerCareTimer" type="Timer" parent="."]
+wait_time = 600.0
+one_shot = true
+
+[node name="StrengthCareTimer" type="Timer" parent="."]
+wait_time = 600.0
+one_shot = true
+
+[node name="SleepCareTimer" type="Timer" parent="."]
+wait_time = 600.0
+one_shot = true
+
+[node name="HungerDrainTimer" type="Timer" parent="."]
+wait_time = 3600.0
+one_shot = true
+
+[node name="StrengthDrainTimer" type="Timer" parent="."]
+wait_time = 3600.0
+one_shot = true
+
+[connection signal="timeout" from="EvolutionTimer" to="." method="_on_evolution_timer_timeout"]
+[connection signal="timeout" from="HungerCareTimer" to="." method="_on_hunger_care_timer_timeout"]
+[connection signal="timeout" from="StrengthCareTimer" to="." method="_on_strength_care_timer_timeout"]
+[connection signal="timeout" from="SleepCareTimer" to="." method="_on_sleep_care_timer_timeout"]
+[connection signal="timeout" from="HungerDrainTimer" to="." method="_on_hunger_drain_timer_timeout"]
+[connection signal="timeout" from="StrengthDrainTimer" to="." method="_on_strength_drain_timer_timeout"]

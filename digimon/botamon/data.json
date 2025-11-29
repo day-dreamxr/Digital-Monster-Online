@@ -1,0 +1,104 @@
+{"digimon": [
+	{
+		"id": 0,
+		"name": "Botamon Egg",
+		"attribute": "Free",
+		"stage": "Egg",
+		"evolutions": [
+			{
+				"id": 1,
+				"requirements": []
+			}
+		],
+		"base_power": 0,
+		"bedtime": "N/A"
+	},
+	{
+		"id": 1,
+		"name": "Botamon",
+		"attribute": "Free",
+		"stage": "Fresh",
+		"evolutions": [
+			{
+				"id": 2,
+				"requirements": []
+			}
+		],
+		"base_power": 0,
+		"bedtime": "N/A"
+	},
+	{
+		"id": 2,
+		"name": "Koromon",
+		"attribute": "Free",
+		"stage": "In-Training",
+		"evolutions": [
+			{
+				"id": 3,
+				"requirements": {
+					"care_mistakes": 2
+				}
+			}
+		],
+		"base_power": 0,
+		"bedtime": 2100
+	},
+	{
+		"id": 3,
+		"name": "Agumon",
+		"attribute": "Vaccine",
+		"stage": "Rookie",
+		"evolutions": [
+			{
+				"id": 4,
+				"requirements": {
+					"care_mistakes": 2,
+					"effort": 16,
+				}
+			}
+		],
+		"base_power": 18,
+		"bedtime": 2100
+	},
+	{
+		"id": 4,
+		"name": "Greymon",
+		"attribute": "Vaccine",
+		"stage": "Champion",
+		"evolutions": [
+			{
+				"id": 5,
+				"requirements": {
+					"battles": 15
+				}
+			}
+		],
+		"base_power": 75,
+		"bedtime": 2300
+	},
+	{
+		"id": 5,
+		"name": "MetalGreymon",
+		"attribute": "Virus",
+		"stage": "Ultimate",
+		"evolutions": [
+			{
+				"id": 6,
+				"requirements": {
+					"care_mistakes": 2
+				}
+			}
+		],
+		"base_power": 126,
+		"bedtime": 2300
+	},
+	{
+		"id": 6,
+		"name": "BlitzGreymon",
+		"attribute": "Virus",
+		"stage": "Mega",
+		"evolutions": [],
+		"base_power": 188,
+		"bedtime": 2300
+	},
+]}

@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://duc751cvwsffh"]
+
+[ext_resource type="Texture2D" uid="uid://x412sq5w6gl8" path="res://digimon/botamon/sprites/0.png" id="1_g74hr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpsab"]
+atlas = ExtResource("1_g74hr")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpsab")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
