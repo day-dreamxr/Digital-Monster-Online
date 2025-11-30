@@ -82,6 +82,11 @@ var time_until_evolution := float():
 		time_until_evolution = value
 		time_until_evolution_changed.emit(value)
 
+var state := String():
+	set(value):
+		state = value
+		state_changed.emit(value)
+
 signal id_changed(new_value: int)
 signal age_changed(new_value: int)
 signal weight_changed(new_value: int)
@@ -92,6 +97,7 @@ signal battles_changed(new_value: int)
 signal care_mistakes_changed(new_value: int)
 signal overfeeds_changed(new_value: int)
 signal time_until_evolution_changed(new_value: float)
+signal state_changed(new_value: String)
 signal digimon_saved
 
 func _ready():
@@ -148,6 +154,7 @@ func load_save_data(type: String) -> Error:
 			care_mistakes = json.get("care_mistakes", care_mistakes)
 			overfeeds = json.get("overfeeds", overfeeds)
 			time_until_evolution = json.get("time_until_evolution", time_until_evolution)
+			state = json.get("state", state)
 	else:
 		save_preferences(type)
 	return OK
@@ -177,6 +184,7 @@ func save_preferences(type: String) -> Error:
 			"care_mistakes": care_mistakes,
 			"overfeeds": overfeeds,
 			"time_until_evolution": time_until_evolution,
+			"state": state,
 		}))
 		digivice_saved.emit()
 	return OK

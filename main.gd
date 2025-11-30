@@ -12,7 +12,7 @@ signal cage_color_changed(new_value: Color)
 signal background_color_changed(new_value: Color)
 signal screen_background_index_changed(new_value: int)
 
-@onready var buttons: Array[TextureButton] = [%TopButtons/Health, %TopButtons/Feed, %TopButtons/Train, %TopButtons/Battle, %TopButtons/Flush]
+@onready var buttons: Array[TextureButton] = [%TopButtons/Health, %TopButtons/Feed, %TopButtons/Train, %TopButtons/Battle, %BottomButtons/Flush, %BottomButtons/Sleep, %BottomButtons/Bandage]
 @onready var focus_index = -1
 @onready var focused = false
 
@@ -32,9 +32,21 @@ func _ready() -> void:
 	digimon.load_digimon()
 	SaveData.digivice_saved.connect(reload_colors)
 	reload_colors()
-	digimon.initialize_timers()
+	if digimon.stage != "Egg":
+		digimon.initialize_timers()
+	if digimon.state == "sleeping":
+		digimon.sleep()
 
 func _process(_delta: float) -> void:
+	var hour = Time.get_time_dict_from_system()["hour"]
+	if (hour >= digimon.bedtime or hour < 7) and digimon.state != "sleeping":
+		digimon.state = "tired"
+		digimon.play(digimon.state)
+		digimon.get_child(3).start(600)
+	if !digimon.get_child(1).is_stopped() or !digimon.get_child(2).is_stopped() or !digimon.get_child(3).is_stopped():
+		%BottomButtons/Call.texture_normal = load("res://sprites/ui/buttons/call.png")
+	else:
+		%BottomButtons/Call.texture_normal = load("res://sprites/ui/buttons/call_gray.png")
 	if Input.is_action_just_pressed("force_digivolve"):
 		digimon.get_child(0).start(0.1)
 
@@ -136,6 +148,7 @@ func _on_a_pressed() -> void:
 			health_screens[health_index].show()
 			%HealthMenu.hide()
 			%TopButtons.show()
+			%BottomButtons.show()
 			digimon.show()
 		else:
 			health_screens[health_index].show()
@@ -159,11 +172,13 @@ func _on_a_pressed() -> void:
 func _on_health_pressed() -> void:
 	digimon.hide()
 	%TopButtons.hide()
+	%BottomButtons.hide()
 	%HealthMenu.show()
 
 func _on_feed_pressed() -> void:
 	digimon.hide()
 	%TopButtons.hide()
+	%BottomButtons.hide()
 	%FeedMenu.show()
 	%FoodButton.grab_focus()
 
@@ -230,6 +245,15 @@ func _on_train_pressed() -> void:
 func _on_battle_pressed() -> void:
 	digimon.battles += 1
 	digimon.save_digimon()
+
+func _on_flush_pressed() -> void:
+	pass
+
+func _on_sleep_pressed() -> void:
+	if digimon.state == "idle":
+		digimon.sleep()
+	else:
+		digimon.wake()
 
 func _on_save_timer_timeout() -> void:
 	digimon.save_digimon()

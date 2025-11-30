@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bct4c58g14yqa"]
+[gd_scene load_steps=27 format=3 uid="uid://bct4c58g14yqa"]
 
 [ext_resource type="Script" uid="uid://cy8mwlux2rpy1" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://b4b6rvhloaega" path="res://sprites/ui/buttons/health.png" id="2_7mycd"]
@@ -15,12 +15,17 @@
 [ext_resource type="Texture2D" uid="uid://dixkvwe4dui73" path="res://sprites/ui/buttons/battle.png" id="9_82xsv"]
 [ext_resource type="Texture2D" uid="uid://ciw2op5nxa1ki" path="res://sprites/ui/buttons/flush_gray.png" id="10_getpj"]
 [ext_resource type="Texture2D" uid="uid://b20qurp3wnuh4" path="res://sprites/ui/buttons/flush.png" id="11_ryguw"]
+[ext_resource type="Texture2D" uid="uid://bhl5rc45imwcl" path="res://sprites/ui/buttons/sleep_gray.png" id="12_a6jrf"]
 [ext_resource type="Texture2D" uid="uid://cu1nvi73lmbh5" path="res://sprites/ui/buttons/arrow_gray.png" id="12_cegan"]
 [ext_resource type="Texture2D" uid="uid://byyseqyqwl5jg" path="res://sprites/ui/buttons/empty_heart.png" id="12_getpj"]
 [ext_resource type="Texture2D" uid="uid://dkcp3o25mte56" path="res://sprites/ui/buttons/arrow.png" id="13_82xsv"]
+[ext_resource type="Texture2D" uid="uid://10vyfaunltuv" path="res://sprites/ui/buttons/sleep.png" id="13_xuqvo"]
 [ext_resource type="Texture2D" uid="uid://b2e6r7pgb5jei" path="res://sprites/ui/buttons/food.png" id="14_getpj"]
+[ext_resource type="Texture2D" uid="uid://mm1g8o7kdngl" path="res://sprites/ui/buttons/bandage_gray.png" id="14_qsp4k"]
+[ext_resource type="Texture2D" uid="uid://ddtlq11jx3l3v" path="res://sprites/ui/buttons/bandage.png" id="15_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cil6odttp2wpx" path="res://sprites/ui/buttons/pill.png" id="15_ryguw"]
 [ext_resource type="PackedScene" uid="uid://gb0n6cvoq08r" path="res://digimon/digimon.tscn" id="16_82xsv"]
+[ext_resource type="Texture2D" uid="uid://djem8v7wovach" path="res://sprites/ui/buttons/call_gray.png" id="16_seu75"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
@@ -72,10 +77,39 @@ layout_mode = 2
 texture_normal = ExtResource("8_cegan")
 texture_focused = ExtResource("9_82xsv")
 
-[node name="Flush" type="TextureButton" parent="ScreenBackground/TopButtons"]
+[node name="BottomButtons" type="HBoxContainer" parent="ScreenBackground"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -133.75
+offset_top = -50.0
+offset_right = 133.75
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Flush" type="TextureButton" parent="ScreenBackground/BottomButtons"]
 layout_mode = 2
 texture_normal = ExtResource("10_getpj")
 texture_focused = ExtResource("11_ryguw")
+
+[node name="Sleep" type="TextureButton" parent="ScreenBackground/BottomButtons"]
+layout_mode = 2
+texture_normal = ExtResource("12_a6jrf")
+texture_focused = ExtResource("13_xuqvo")
+
+[node name="Bandage" type="TextureButton" parent="ScreenBackground/BottomButtons"]
+layout_mode = 2
+texture_normal = ExtResource("14_qsp4k")
+texture_focused = ExtResource("15_kq58d")
+
+[node name="Call" type="TextureButton" parent="ScreenBackground/BottomButtons"]
+layout_mode = 2
+texture_normal = ExtResource("16_seu75")
 
 [node name="HealthMenu" type="TextureRect" parent="ScreenBackground"]
 unique_name_in_owner = true
@@ -593,6 +627,7 @@ autostart = true
 [connection signal="pressed" from="ScreenBackground/TopButtons/Feed" to="." method="_on_feed_pressed"]
 [connection signal="pressed" from="ScreenBackground/TopButtons/Train" to="." method="_on_train_pressed"]
 [connection signal="pressed" from="ScreenBackground/TopButtons/Battle" to="." method="_on_battle_pressed"]
+[connection signal="pressed" from="ScreenBackground/BottomButtons/Sleep" to="." method="_on_sleep_pressed"]
 [connection signal="pressed" from="ScreenBackground/FeedMenu/VBoxContainer/HBoxContainer/FoodButton" to="." method="_on_food_button_pressed"]
 [connection signal="pressed" from="ScreenBackground/FeedMenu/VBoxContainer/HBoxContainer2/PillButton" to="." method="_on_pill_button_pressed"]
 [connection signal="pressed" from="Cage/Control/A" to="." method="_on_a_pressed"]
