@@ -1,0 +1,56 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://0ygkk3tejx64"]
+
+[ext_resource type="Texture2D" uid="uid://c475uhi7l5utu" path="res://digimon/botamon/sprites/12.png" id="1_ppeao"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpa0p"]
+atlas = ExtResource("1_ppeao")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co0ds"]
+atlas = ExtResource("1_ppeao")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00mpd"]
+atlas = ExtResource("1_ppeao")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oofag"]
+atlas = ExtResource("1_ppeao")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8wu4"]
+atlas = ExtResource("1_ppeao")
+region = Rect2(128, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpa0p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co0ds")
+}],
+"loop": true,
+"name": &"eating",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00mpd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oofag")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8wu4")
+}],
+"loop": true,
+"name": &"sleeping",
+"speed": 1.0
+}]
