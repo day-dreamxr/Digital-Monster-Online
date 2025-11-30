@@ -23,25 +23,30 @@ var id: int = 0
 @export var overfeeds: int = 0
 @export var bedtime: int = 0000
 
+var state: String = "idle"
+
 func start_evolution_timer() -> void:
 	var time: int
-	match stage:
-		"Egg":
-			time = 60
-		"Fresh":
-			time = 600
-		"In-Training":
-			time = 21600
-		"Rookie":
-			time = 86400
-		"Champion":
-			time = 129600
-		"Ultimate":
-			time = 172800
+	if SaveData.time_until_evolution == 0.0:
+		match stage:
+			"Egg":
+				time = 60
+			"Fresh":
+				time = 600
+			"In-Training":
+				time = 21600
+			"Rookie":
+				time = 86400
+			"Champion":
+				time = 129600
+			"Ultimate":
+				time = 172800
+	else:
+		time = ceili(SaveData.time_until_evolution)
 	$EvolutionTimer.start(time)
 
 func _on_evolution_timer_timeout() -> void:
-	if stage == "Mega":
+	if stage == "Mega" or state == "dead":
 		return
 	var can_evolve: bool
 	for digimon in current_digimon["digimon"]:
@@ -82,9 +87,13 @@ func _on_sleep_care_timer_timeout() -> void:
 	save_digimon()
 
 func set_sprites(sprite_id: int):
-	var frames = load("res://digimon/botamon/sprites/"+str(sprite_id)+".tres")
-	self.frames = frames
-	self.play("idle")
+	if sprite_id == 999:
+		var frames = load("res://digimon/grave.tres")
+		self.frames = frames
+	else:
+		var frames = load("res://digimon/botamon/sprites/"+str(sprite_id)+".tres")
+		self.frames = frames
+		self.play("idle")
 
 func digivolve(new_id: int):
 	if stage == "Egg":
@@ -100,15 +109,22 @@ func digivolve(new_id: int):
 			battles = 0
 			care_mistakes = 0
 			overfeeds = 0
-			if digimon["bedtime"] is int:
-				bedtime = digimon["bedtime"]
+			bedtime = digimon["bedtime"]
 			set_sprites(digimon["id"])
 			stats_changed.emit()
 	start_evolution_timer()
 	save_digimon()
 
 func die():
-	print("rip")
+	state = "dead"
+	set_sprites(999)
+	$EvolutionTimer.stop()
+	$HungerCareTimer.stop()
+	$StrengthCareTimer.stop()
+	$SleepCareTimer.stop()
+	$HungerDrainTimer.stop()
+	$StrengthDrainTimer.stop()
+	save_digimon()
 
 func save_digimon():
 	SaveData.id = id
@@ -121,6 +137,7 @@ func save_digimon():
 	SaveData.care_mistakes = care_mistakes
 	SaveData.overfeeds = overfeeds
 	SaveData.time_until_evolution = $EvolutionTimer.time_left
+	SaveData.state = state
 	
 	SaveData.save_when_ready()
 
@@ -140,38 +157,48 @@ func load_digimon():
 			battles = SaveData.battles
 			care_mistakes = SaveData.care_mistakes
 			overfeeds = SaveData.overfeeds
-			if digimon["bedtime"] is int:
-				bedtime = digimon["bedtime"]
-			if SaveData.time_until_evolution == 0.0:
-				start_evolution_timer()
-			else:
-				$EvolutionTimer.start(SaveData.time_until_evolution)
+			bedtime = digimon["bedtime"]
+			state = SaveData.state
+			start_evolution_timer()
 			set_sprites(SaveData.id)
 	stats_changed.emit()
 
 func _on_hunger_drain_timer_timeout() -> void:
-	hunger -= 1
-	if hunger == 0:
-		$HungerCareTimer.start(600)
-	else:
-		$HungerDrainTimer.start(3600)
+	if hunger > 0:
+		hunger -= 1
+	initialize_timers()
 	save_digimon()
 
 func _on_strength_drain_timer_timeout() -> void:
-	strength -= 1
-	if strength == 0:
-		$StrengthCareTimer.start(600)
-	else:
-		$StrengthDrainTimer.start(3600)
+	if strength > 0:
+		strength -= 1
+	initialize_timers()
 	save_digimon()
 
 func initialize_timers():
-	if stage != "Egg":
-		if hunger == 0:
-			$HungerCareTimer.start(600)
-		else:
-			$HungerDrainTimer.start(3600)
-		if strength == 0:
-			$StrengthCareTimer.start(600)
-		else:
-			$StrengthDrainTimer.start(3600)
+	if hunger < 1:
+		$HungerCareTimer.start(600)
+	else:
+		$HungerDrainTimer.start(3600)
+	if strength < 1:
+		$StrengthCareTimer.start(600)
+	else:
+		$StrengthDrainTimer.start(3600)
+
+func sleep():
+	state = "sleeping"
+	self.play(state)
+	$EvolutionTimer.stop()
+	$HungerCareTimer.stop()
+	$StrengthCareTimer.stop()
+	$SleepCareTimer.stop()
+	$HungerDrainTimer.stop()
+	$StrengthDrainTimer.stop()
+	SaveData.save_when_ready()
+
+func wake():
+	state = "idle"
+	self.play(state)
+	start_evolution_timer()
+	initialize_timers()
+	SaveData.save_when_ready()

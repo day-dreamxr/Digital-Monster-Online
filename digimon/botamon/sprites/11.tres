@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://burypoipmjpwx"]
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://burypoipmjpwx"]
 
 [ext_resource type="Texture2D" uid="uid://bvb1f4aogmtey" path="res://digimon/botamon/sprites/11.png" id="1_1xp0y"]
 
@@ -21,6 +21,10 @@ region = Rect2(16, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_44vcw"]
 atlas = ExtResource("1_1xp0y")
 region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xp0y"]
+atlas = ExtResource("1_1xp0y")
+region = Rect2(96, 0, 16, 16)
 
 [resource]
 animations = [{
@@ -53,4 +57,12 @@ animations = [{
 "loop": true,
 "name": &"sleeping",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xp0y")
+}],
+"loop": true,
+"name": &"tired",
+"speed": 5.0
 }]
