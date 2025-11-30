@@ -46,7 +46,7 @@ func start_evolution_timer() -> void:
 	$EvolutionTimer.start(time)
 
 func _on_evolution_timer_timeout() -> void:
-	if stage == "Mega":
+	if stage == "Mega" or state == "dead":
 		return
 	var can_evolve: bool
 	for digimon in current_digimon["digimon"]:
@@ -87,9 +87,13 @@ func _on_sleep_care_timer_timeout() -> void:
 	save_digimon()
 
 func set_sprites(sprite_id: int):
-	var frames = load("res://digimon/botamon/sprites/"+str(sprite_id)+".tres")
-	self.frames = frames
-	self.play(state)
+	if sprite_id == 999:
+		var frames = load("res://digimon/grave.tres")
+		self.frames = frames
+	else:
+		var frames = load("res://digimon/botamon/sprites/"+str(sprite_id)+".tres")
+		self.frames = frames
+		self.play("idle")
 
 func digivolve(new_id: int):
 	if stage == "Egg":
@@ -105,15 +109,22 @@ func digivolve(new_id: int):
 			battles = 0
 			care_mistakes = 0
 			overfeeds = 0
-			if digimon["bedtime"] is int:
-				bedtime = digimon["bedtime"]
+			bedtime = digimon["bedtime"]
 			set_sprites(digimon["id"])
 			stats_changed.emit()
 	start_evolution_timer()
 	save_digimon()
 
 func die():
-	print("rip")
+	state = "dead"
+	set_sprites(999)
+	$EvolutionTimer.stop()
+	$HungerCareTimer.stop()
+	$StrengthCareTimer.stop()
+	$SleepCareTimer.stop()
+	$HungerDrainTimer.stop()
+	$StrengthDrainTimer.stop()
+	save_digimon()
 
 func save_digimon():
 	SaveData.id = id
@@ -126,6 +137,7 @@ func save_digimon():
 	SaveData.care_mistakes = care_mistakes
 	SaveData.overfeeds = overfeeds
 	SaveData.time_until_evolution = $EvolutionTimer.time_left
+	SaveData.state = state
 	
 	SaveData.save_when_ready()
 
@@ -146,6 +158,7 @@ func load_digimon():
 			care_mistakes = SaveData.care_mistakes
 			overfeeds = SaveData.overfeeds
 			bedtime = digimon["bedtime"]
+			state = SaveData.state
 			start_evolution_timer()
 			set_sprites(SaveData.id)
 	stats_changed.emit()

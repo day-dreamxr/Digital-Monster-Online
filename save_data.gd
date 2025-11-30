@@ -213,3 +213,17 @@ func import_save_data(content: PackedByteArray):
 		background_color = Color.html(json.get("background_color", background_color))
 		screen_background_index = json.get("screen_background_index", screen_background_index)
 	save_preferences("digivice")
+
+func reset_digimon() -> void:
+	id = 0
+	age = 0
+	weight = 0
+	hunger = 0
+	strength = 0
+	effort = 0
+	battles = 0
+	care_mistakes = 0
+	overfeeds = 0
+	time_until_evolution = 0
+	state = "idle"
+	save_preferences("digimon")

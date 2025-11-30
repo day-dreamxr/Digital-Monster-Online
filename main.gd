@@ -36,17 +36,36 @@ func _ready() -> void:
 		digimon.initialize_timers()
 	if digimon.state == "sleeping":
 		digimon.sleep()
+	if digimon.state == "dead":
+		digimon.die()
 
 func _process(_delta: float) -> void:
 	var hour = Time.get_time_dict_from_system()["hour"]
-	if (hour >= digimon.bedtime or hour < 7) and digimon.state != "sleeping":
-		digimon.state = "tired"
-		digimon.play(digimon.state)
-		digimon.get_child(3).start(600)
+	if digimon.state != "dead":
+		if digimon.bedtime != 0 and digimon.stage != "Egg":
+			if (hour >= digimon.bedtime or hour < 7) and digimon.state != "sleeping":
+				digimon.state = "tired"
+				digimon.play(digimon.state)
+				digimon.get_child(3).start(600)
+			else:
+				digimon.state = "idle"
+				digimon.play(digimon.state)
+				digimon.get_child(3).stop()
+		else:
+			if (hour >= digimon.bedtime and hour < 7) and digimon.state != "sleeping":
+				digimon.state = "tired"
+				digimon.play(digimon.state)
+				digimon.get_child(3).start(600)
+			else:
+				digimon.state = "idle"
+				digimon.play(digimon.state)
+				digimon.get_child(3).stop()
 	if !digimon.get_child(1).is_stopped() or !digimon.get_child(2).is_stopped() or !digimon.get_child(3).is_stopped():
 		%BottomButtons/Call.texture_normal = load("res://sprites/ui/buttons/call.png")
 	else:
 		%BottomButtons/Call.texture_normal = load("res://sprites/ui/buttons/call_gray.png")
+	if digimon.care_mistakes > 4:
+		digimon.die()
 	if Input.is_action_just_pressed("force_digivolve"):
 		digimon.get_child(0).start(0.1)
 
@@ -141,6 +160,7 @@ func _on_web_save_data_picker_file_loaded(content: PackedByteArray, _filename: S
 
 func _on_a_pressed() -> void:
 	if %HealthMenu.visible:
+		digimon.hide()
 		health_screens[health_index].hide()
 		health_index += 1
 		if health_index >= len(health_screens):
@@ -170,7 +190,6 @@ func _on_a_pressed() -> void:
 				buttons[focus_index].grab_focus()
 
 func _on_health_pressed() -> void:
-	digimon.hide()
 	%TopButtons.hide()
 	%BottomButtons.hide()
 	%HealthMenu.show()
@@ -198,6 +217,9 @@ func _on_b_pressed() -> void:
 			%PillButton.pressed.emit()
 
 func _on_c_pressed() -> void:
+	if digimon.state == "dead":
+		SaveData.reset_digimon()
+		digimon.load_digimon()
 	if %TopButtons.visible:
 		focused = false
 		focus_index = -1
@@ -207,9 +229,11 @@ func _on_c_pressed() -> void:
 		health_screens[health_index].show()
 		%HealthMenu.hide()
 		%TopButtons.show()
+		%BottomButtons.show()
 		digimon.show()
 	elif %FeedMenu.visible:
 		%TopButtons.show()
+		%BottomButtons.show()
 		%FeedMenu.hide()
 		digimon.show()
 
