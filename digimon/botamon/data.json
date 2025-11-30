@@ -59,6 +59,32 @@
 					"care_mistakes": 2,
 					"effort": 16,
 				}
+			},
+			{
+				"id": 8,
+				"requirements": {
+					"care_mistakes": 2
+				}
+			},
+			{
+				"id": 12,
+				"requirements": {
+					"care_mistakes": 4,
+					"effort": 16,
+					"overfeeds": 3
+				}
+			},
+			{
+				"id": 11,
+				"requirements": {
+					"care_mistakes": 4,
+					"effort": 5,
+					"overfeeds": 3
+				}
+			},
+			{
+				"id": 10,
+				"requirements": []
 			}
 		],
 		"base_power": 18,
@@ -110,8 +136,173 @@
 		"name": "Betamon",
 		"attribute": "Virus",
 		"stage": "Rookie",
-		"evolutions": [],
+		"evolutions": [
+			{
+				"id": 8,
+				"requirements": {
+					"care_mistakes": 2,
+					"effort": 16,
+				}
+			}
+			,
+			{
+				"id": 13,
+				"requirements": {
+					"care_mistakes": 4,
+					"effort": 8,
+					"overfeeds": 3
+				}
+			},
+			{
+				"id": 9,
+				"requirements": {
+					"care_mistakes": 4,
+					"effort": 8,
+				}
+			},
+			{
+				"id": 12,
+				"requirements": {
+					"care_mistakes": 2,
+					"effort": 0
+				}
+			},
+			{
+				"id": 10,
+				"requirements": []
+			}
+		],
 		"base_power": 10,
 		"bedtime": 2200
-	}
+	},
+	{
+		"id": 8,
+		"name": "Devimon",
+		"attribute": "Virus",
+		"stage": "Champion",
+		"evolutions": [
+			{
+				"id": 5,
+				"requirements": {
+					"battles": 15
+				}
+			}
+		],
+		"base_power": 65,
+		"bedtime": 0
+	},
+	{
+		"id": 9,
+		"name": "Airdramon",
+		"attribute": "Vaccine",
+		"stage": "Champion",
+		"evolutions": [
+			{
+				"id": 5,
+				"requirements": {
+					"battles": 15
+				}
+			}
+		],
+		"base_power": 55,
+		"bedtime": 0
+	},
+	{
+		"id": 10,
+		"name": "Numemon",
+		"attribute": "Virus",
+		"stage": "Champion",
+		"evolutions": [
+			{
+				"id": 14,
+				"requirements": {
+					"battles": 15
+				}
+			}
+		],
+		"base_power": 40,
+		"bedtime": 2100
+	},
+	{
+		"id": 11,
+		"name": "Tyrannomon",
+		"attribute": "Data",
+		"stage": "Champion",
+		"evolutions": [
+			{
+				"id": 15,
+				"requirements": {
+					"battles": 15
+				}
+			}
+		],
+		"base_power": 70,
+		"bedtime": 0
+	},
+	{
+		"id": 12,
+		"name": "Meramon",
+		"attribute": "Data",
+		"stage": "Champion",
+		"evolutions": [
+			{
+				"id": 15,
+				"requirements": {
+					"battles": 15
+				}
+			}
+		],
+		"base_power": 60,
+		"bedtime": 0
+	},
+	{
+		"id": 13,
+		"name": "Seadramon",
+		"attribute": "Data",
+		"stage": "Champion",
+		"evolutions": [
+			{
+				"id": 15,
+				"requirements": {
+					"battles": 15
+				}
+			}
+		],
+		"base_power": 50,
+		"bedtime": 0
+	},
+	{
+		"id": 14,
+		"name": "Monzaemon",
+		"attribute": "Vaccine",
+		"stage": "Ultimate",
+		"evolutions": [],
+		"base_power": 107,
+		"bedtime": 2300
+	},
+	{
+		"id": 15,
+		"name": "Mamemon",
+		"attribute": "Data",
+		"stage": "Ultimate",
+		"evolutions": [
+			{
+				"id": 16,
+				"requirements": {
+					"care_mistakes": 2
+				}
+			}
+		],
+		"base_power": 118,
+		"bedtime": 2200
+	},
+	{
+		"id": 16,
+		"name": "BanchoMamemon",
+		"attribute": "Data",
+		"stage": "Mega",
+		"evolutions": [],
+		"base_power": 176,
+		"bedtime": 0
+	},
 ]}

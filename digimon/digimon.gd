@@ -46,6 +46,8 @@ func _on_evolution_timer_timeout() -> void:
 	var can_evolve: bool
 	for digimon in current_digimon["digimon"]:
 		if id == digimon["id"]:
+			if len(digimon["evolutions"]) < 1:
+				return
 			for evolution in digimon["evolutions"]:
 				can_evolve = true
 				for requirement in evolution["requirements"]:
