@@ -23,6 +23,10 @@ signal screen_background_index_changed(new_value: int)
 
 @onready var digimon = $ScreenBackground/Digimon
 
+@onready var hunger_hearts: Array[TextureRect] = [%HungryHearts/Heart1, %HungryHearts/Heart2, %HungryHearts/Heart3, %HungryHearts/Heart4]
+@onready var strength_hearts: Array[TextureRect] = [%StrengthHearts/Heart1, %StrengthHearts/Heart2, %StrengthHearts/Heart3, %StrengthHearts/Heart4]
+@onready var effort_hearts: Array[TextureRect] = [%EffortHearts/Heart1, %EffortHearts/Heart2, %EffortHearts/Heart3, %EffortHearts/Heart4]
+
 func _ready() -> void:
 	digimon.stats_changed.connect(_set_stats)
 	digimon.load_digimon()
@@ -42,6 +46,19 @@ func _set_stats() -> void:
 		digimon.strength = 4
 	if digimon.weight > 99:
 		digimon.weight = 99
+	for i in range(0, 4):
+		if digimon.hunger - i > 0:
+			hunger_hearts[i].texture = load("uid://bmuf10jdkmndr")
+		else:
+			hunger_hearts[i].texture = load("uid://byyseqyqwl5jg")
+		if digimon.strength - i > 0:
+			strength_hearts[i].texture = load("uid://bmuf10jdkmndr")
+		else:
+			strength_hearts[i].texture = load("uid://byyseqyqwl5jg")
+		if floori(digimon.effort/4) >= i + 1:
+			effort_hearts[i].texture = load("uid://bmuf10jdkmndr")
+		else:
+			effort_hearts[i].texture = load("uid://byyseqyqwl5jg")
 	%NameLabel.text = digimon.digimon_name
 	%AgeLabel.text = str(digimon.age) + " A"
 	%WeightLabel.text = str(digimon.weight) + " G"
@@ -170,6 +187,7 @@ func _on_c_pressed() -> void:
 		focused = false
 		focus_index = -1
 	elif %HealthMenu.visible:
+		health_screens[health_index].hide()
 		health_index = 0
 		health_screens[health_index].show()
 		%HealthMenu.hide()
