@@ -48,8 +48,6 @@ func _process(_delta: float) -> void:
 				digimon.play(digimon.state)
 				digimon.get_child(3).start(600)
 			else:
-				digimon.state = "idle"
-				digimon.play(digimon.state)
 				digimon.get_child(3).stop()
 		else:
 			if (hour >= digimon.bedtime and hour < 7) and digimon.state != "sleeping":
@@ -57,8 +55,6 @@ func _process(_delta: float) -> void:
 				digimon.play(digimon.state)
 				digimon.get_child(3).start(600)
 			else:
-				digimon.state = "idle"
-				digimon.play(digimon.state)
 				digimon.get_child(3).stop()
 	if !digimon.get_child(1).is_stopped() or !digimon.get_child(2).is_stopped() or !digimon.get_child(3).is_stopped():
 		%BottomButtons/Call.texture_normal = load("res://sprites/ui/buttons/call.png")
@@ -274,7 +270,7 @@ func _on_flush_pressed() -> void:
 	pass
 
 func _on_sleep_pressed() -> void:
-	if digimon.state == "idle":
+	if digimon.state != "sleeping":
 		digimon.sleep()
 	else:
 		digimon.wake()

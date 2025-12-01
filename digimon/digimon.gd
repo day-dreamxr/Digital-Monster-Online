@@ -187,6 +187,7 @@ func initialize_timers():
 
 func sleep():
 	state = "sleeping"
+	SaveData.state = state
 	self.play(state)
 	$EvolutionTimer.stop()
 	$HungerCareTimer.stop()
