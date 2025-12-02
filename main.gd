@@ -228,6 +228,7 @@ func _on_c_pressed() -> void:
 		%BottomButtons.show()
 		digimon.show()
 	elif %FeedMenu.visible:
+		feed_focus = 0
 		%TopButtons.show()
 		%BottomButtons.show()
 		%FeedMenu.hide()

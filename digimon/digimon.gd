@@ -25,9 +25,9 @@ var id: int = 0
 
 var state: String = "idle"
 
-func start_evolution_timer() -> void:
+func start_evolution_timer(loading: bool) -> void:
 	var time: int
-	if SaveData.time_until_evolution == 0.0:
+	if not loading or SaveData.time_until_evolution == 0.0:
 		match stage:
 			"Egg":
 				time = 60
@@ -112,7 +112,7 @@ func digivolve(new_id: int):
 			bedtime = digimon["bedtime"]
 			set_sprites(digimon["id"])
 			stats_changed.emit()
-	start_evolution_timer()
+	start_evolution_timer(false)
 	save_digimon()
 
 func die():
@@ -159,7 +159,7 @@ func load_digimon():
 			overfeeds = SaveData.overfeeds
 			bedtime = digimon["bedtime"]
 			state = SaveData.state
-			start_evolution_timer()
+			start_evolution_timer(true)
 			set_sprites(SaveData.id)
 	stats_changed.emit()
 
@@ -200,6 +200,6 @@ func sleep():
 func wake():
 	state = "idle"
 	self.play(state)
-	start_evolution_timer()
+	start_evolution_timer(true)
 	initialize_timers()
 	SaveData.save_when_ready()
