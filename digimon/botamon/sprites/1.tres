@@ -34,8 +34,20 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aktv4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg7w7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aktv4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg7w7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aktv4")
 }],
-"loop": true,
+"loop": false,
 "name": &"eating",
 "speed": 3.0
 }, {

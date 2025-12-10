@@ -1,6 +1,7 @@
 extends AnimatedSprite2D
 
 signal stats_changed
+signal pooped
 
 var current_digimon: Dictionary = preload("res://digimon/botamon/data.json").data
 
@@ -24,6 +25,7 @@ var id: int = 0
 @export var bedtime: int = 0000
 
 var state: String = "idle"
+var poops: int = 0
 
 func start_evolution_timer(loading: bool) -> void:
 	var time: int
@@ -138,6 +140,7 @@ func save_digimon():
 	SaveData.overfeeds = overfeeds
 	SaveData.time_until_evolution = $EvolutionTimer.time_left
 	SaveData.state = state
+	SaveData.poops = poops
 	
 	SaveData.save_when_ready()
 
@@ -159,6 +162,7 @@ func load_digimon():
 			overfeeds = SaveData.overfeeds
 			bedtime = digimon["bedtime"]
 			state = SaveData.state
+			poops = SaveData.poops
 			start_evolution_timer(true)
 			set_sprites(SaveData.id)
 	stats_changed.emit()
@@ -166,6 +170,7 @@ func load_digimon():
 func _on_hunger_drain_timer_timeout() -> void:
 	if hunger > 0:
 		hunger -= 1
+	poop()
 	initialize_timers()
 	save_digimon()
 
@@ -178,10 +183,12 @@ func _on_strength_drain_timer_timeout() -> void:
 func initialize_timers():
 	if hunger < 1:
 		$HungerCareTimer.start(600)
+		AudioPlayer.call.play()
 	else:
 		$HungerDrainTimer.start(3600)
 	if strength < 1:
 		$StrengthCareTimer.start(600)
+		AudioPlayer.call.play()
 	else:
 		$StrengthDrainTimer.start(3600)
 
@@ -203,3 +210,9 @@ func wake():
 	start_evolution_timer(true)
 	initialize_timers()
 	SaveData.save_when_ready()
+
+func poop():
+	poops += 1
+	if poops > 4:
+		poops = 4
+	pooped.emit()

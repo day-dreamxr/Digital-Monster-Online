@@ -1,0 +1,38 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://bhkq3co5s74hy"]
+
+[ext_resource type="Texture2D" uid="uid://cil6odttp2wpx" path="res://sprites/ui/buttons/pill.png" id="1_na8gq"]
+[ext_resource type="Texture2D" uid="uid://b20xo5y0xy1oy" path="res://sprites/ui/buttons/pill_half.png" id="2_si2d0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soui5"]
+atlas = ExtResource("1_na8gq")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yubg"]
+atlas = ExtResource("2_si2d0")
+region = Rect2(0, 0, 100, 100)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_soui5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_soui5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yubg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yubg")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 3.0
+}]
