@@ -21,15 +21,19 @@ signal screen_background_index_changed(new_value: int)
 
 @onready var feed_focus = 0
 
-@onready var digimon = $ScreenBackground/Digimon
+@onready var digimon = $ScreenBackground/DigimonContainer/Digimon
 
 @onready var hunger_hearts: Array[TextureRect] = [%HungryHearts/Heart1, %HungryHearts/Heart2, %HungryHearts/Heart3, %HungryHearts/Heart4]
 @onready var strength_hearts: Array[TextureRect] = [%StrengthHearts/Heart1, %StrengthHearts/Heart2, %StrengthHearts/Heart3, %StrengthHearts/Heart4]
 @onready var effort_hearts: Array[TextureRect] = [%EffortHearts/Heart1, %EffortHearts/Heart2, %EffortHearts/Heart3, %EffortHearts/Heart4]
 
+@onready var poop_sprites: Array[Sprite2D] = [%Poop1, %Poop2, %Poop3, %Poop4]
+
 func _ready() -> void:
+	digimon.pooped.connect(load_poops)
 	digimon.stats_changed.connect(_set_stats)
 	digimon.load_digimon()
+	load_poops()
 	SaveData.digivice_saved.connect(reload_colors)
 	reload_colors()
 	if digimon.stage != "Egg":
@@ -47,6 +51,7 @@ func _process(_delta: float) -> void:
 				digimon.state = "tired"
 				digimon.play(digimon.state)
 				digimon.get_child(3).start(600)
+				AudioPlayer.call.play()
 			else:
 				digimon.get_child(3).stop()
 		else:
@@ -54,6 +59,7 @@ func _process(_delta: float) -> void:
 				digimon.state = "tired"
 				digimon.play(digimon.state)
 				digimon.get_child(3).start(600)
+				AudioPlayer.call.play()
 			else:
 				digimon.get_child(3).stop()
 	if !digimon.get_child(1).is_stopped() or !digimon.get_child(2).is_stopped() or !digimon.get_child(3).is_stopped():
@@ -64,6 +70,8 @@ func _process(_delta: float) -> void:
 		digimon.die()
 	if Input.is_action_just_pressed("force_digivolve"):
 		digimon.get_child(0).start(0.1)
+	if Input.is_action_just_pressed("force_hunger_drain"):
+		digimon.get_child(4).start(0.1)
 
 func _set_stats() -> void:
 	#Ensure stats are accurate
@@ -156,6 +164,7 @@ func _on_web_save_data_picker_file_loaded(content: PackedByteArray, _filename: S
 
 func _on_a_pressed() -> void:
 	if %HealthMenu.visible:
+		%PoopContainer.hide()
 		digimon.hide()
 		health_screens[health_index].hide()
 		health_index += 1
@@ -165,6 +174,7 @@ func _on_a_pressed() -> void:
 			%HealthMenu.hide()
 			%TopButtons.show()
 			%BottomButtons.show()
+			%PoopContainer.show()
 			digimon.show()
 		else:
 			health_screens[health_index].show()
@@ -188,12 +198,14 @@ func _on_a_pressed() -> void:
 func _on_health_pressed() -> void:
 	%TopButtons.hide()
 	%BottomButtons.hide()
+	%PoopContainer.hide()
 	%HealthMenu.show()
 
 func _on_feed_pressed() -> void:
 	digimon.hide()
 	%TopButtons.hide()
 	%BottomButtons.hide()
+	%PoopContainer.hide()
 	%FeedMenu.show()
 	%FoodButton.grab_focus()
 
@@ -203,9 +215,6 @@ func _on_b_pressed() -> void:
 			buttons[focus_index].pressed.emit()
 			focused = false
 			focus_index = -1
-		else:
-			pass
-			#show the clock
 	elif %FeedMenu.visible:
 		if feed_focus == 0:
 			%FoodButton.pressed.emit()
@@ -226,6 +235,7 @@ func _on_c_pressed() -> void:
 		%HealthMenu.hide()
 		%TopButtons.show()
 		%BottomButtons.show()
+		%PoopContainer.show()
 		digimon.show()
 	elif %FeedMenu.visible:
 		feed_focus = 0
@@ -235,19 +245,47 @@ func _on_c_pressed() -> void:
 		digimon.show()
 
 func _on_food_button_pressed() -> void:
+	digimon.position.x += 40
 	if digimon.hunger < 4:
 		digimon.hunger += 1
 		digimon.weight += 1
 	else:
 		digimon.overfeeds += 1
+	%FeedMenu.hide()
+	digimon.show()
+	%Food.frames = load("res://sprites/assets/meat.tres")
+	%Food.show()
+	digimon.play("eating")
+	%Food.play("default")
+	await digimon.animation_finished
+	%FeedMenu.show()
+	digimon.hide()
+	digimon.play("idle")
+	%Food.hide()
+	digimon.position.x -= 40
+	%FoodButton.grab_focus()
 	digimon.get_child(4).start(3600)
 	digimon.get_child(1).stop()
 	_set_stats()
 	digimon.save_digimon()
 
 func _on_pill_button_pressed() -> void:
+	digimon.position.x += 40
 	if digimon.strength < 4:
 		digimon.strength += 1
+	%FeedMenu.hide()
+	digimon.show()
+	%Food.frames = load("res://sprites/assets/pill.tres")
+	%Food.show()
+	digimon.play("eating")
+	%Food.play("default")
+	await digimon.animation_finished
+	%FeedMenu.show()
+	digimon.hide()
+	digimon.play("idle")
+	%Food.hide()
+	digimon.position.x -= 40
+	%PillButton.grab_focus()
 	digimon.get_child(5).start(3600)
 	digimon.weight += 2
 	digimon.get_child(2).stop()
@@ -268,13 +306,20 @@ func _on_battle_pressed() -> void:
 	digimon.save_digimon()
 
 func _on_flush_pressed() -> void:
-	pass
+	for poop in poop_sprites:
+		poop.hide()
+	digimon.poops = 0
+	digimon.save_digimon()
 
 func _on_sleep_pressed() -> void:
 	if digimon.state != "sleeping":
 		digimon.sleep()
 	else:
 		digimon.wake()
+
+func load_poops():
+	for i in range(digimon.poops):
+		poop_sprites[i].show()
 
 func _on_save_timer_timeout() -> void:
 	digimon.save_digimon()

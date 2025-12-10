@@ -87,6 +87,11 @@ var state := String():
 		state = value
 		state_changed.emit(value)
 
+var poops := int():
+	set(value):
+		poops = value
+		poops_changed.emit(value)
+
 signal id_changed(new_value: int)
 signal age_changed(new_value: int)
 signal weight_changed(new_value: int)
@@ -98,7 +103,7 @@ signal care_mistakes_changed(new_value: int)
 signal overfeeds_changed(new_value: int)
 signal time_until_evolution_changed(new_value: float)
 signal state_changed(new_value: String)
-signal digimon_saved
+signal poops_changed(new_value: String)
 
 func _ready():
 	time_until_evolution = 60
@@ -155,6 +160,7 @@ func load_save_data(type: String) -> Error:
 			overfeeds = json.get("overfeeds", overfeeds)
 			time_until_evolution = json.get("time_until_evolution", time_until_evolution)
 			state = json.get("state", state)
+			poops = json.get("poops", poops)
 	else:
 		save_preferences(type)
 	return OK
@@ -185,6 +191,7 @@ func save_preferences(type: String) -> Error:
 			"overfeeds": overfeeds,
 			"time_until_evolution": time_until_evolution,
 			"state": state,
+			"poops": poops,
 		}))
 		digivice_saved.emit()
 	return OK
@@ -226,4 +233,5 @@ func reset_digimon() -> void:
 	overfeeds = 0
 	time_until_evolution = 0
 	state = "idle"
+	poops = 0
 	save_preferences("digimon")
