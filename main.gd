@@ -142,25 +142,11 @@ func _on_cycle_screen_background_pressed() -> void:
 	SaveData.save_when_ready()
 	screen_background_index_changed.emit(SaveData.screen_background_index)
 
-func _on_export_button_pressed() -> void:
-	SaveData.export_save_data()
+func _on_manual_pressed() -> void:
+	OS.shell_open("https://drive.google.com/file/d/1Up7F3yHLxTroT9v7-qRSp98J3x0lhRQh/view")
 
-func _on_import_button_pressed() -> void:
-	if OS.has_feature("web"):
-		$WebSaveDataPicker.show()
-	else:
-		$SaveDataPicker.show()
-
-func _on_save_data_selected(path: String) -> Error:
-	var file := FileAccess.get_file_as_bytes(path)
-	var err := FileAccess.get_open_error()
-	if err != OK:
-		return err
-	SaveData.import_save_data(file)
-	return OK
-
-func _on_web_save_data_picker_file_loaded(content: PackedByteArray, _filename: String) -> void:
-	SaveData.import_save_data(content)
+func _on_guide_pressed() -> void:
+	OS.shell_open("https://humulos.com/digimon/dm20/")
 
 func _on_a_pressed() -> void:
 	if %HealthMenu.visible:

@@ -196,31 +196,6 @@ func save_preferences(type: String) -> Error:
 		digivice_saved.emit()
 	return OK
 
-func export_save_data() -> void:
-	var save_data = {
-		"body_color": body_color.to_html(),
-		"cage_color": cage_color.to_html(),
-		"background_color": background_color.to_html(),
-		"screen_background_index": screen_background_index,
-	}
-	var json = JSON.stringify(save_data)
-	if OS.has_feature("web"):
-		JavaScriptBridge.download_buffer(json.to_utf8_buffer(), "digivice.json", "application/json")
-	else:
-		var file := FileAccess.open("user://digivice.json", FileAccess.WRITE)
-		file.store_string(json)
-		file.close()
-		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://digivice.json"))
-	
-func import_save_data(content: PackedByteArray):
-	var json = JSON.parse_string(content.get_string_from_utf8())
-	if json is Dictionary:
-		body_color = Color.html(json.get("body_color", body_color))
-		cage_color = Color.html(json.get("cage_color", cage_color))
-		background_color = Color.html(json.get("background_color", background_color))
-		screen_background_index = json.get("screen_background_index", screen_background_index)
-	save_preferences("digivice")
-
 func reset_digimon() -> void:
 	id = 0
 	age = 0

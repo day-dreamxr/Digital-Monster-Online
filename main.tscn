@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bct4c58g14yqa"]
+[gd_scene load_steps=27 format=3 uid="uid://bct4c58g14yqa"]
 
 [ext_resource type="Script" uid="uid://cy8mwlux2rpy1" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://b4b6rvhloaega" path="res://sprites/ui/buttons/health.png" id="2_7mycd"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://drjl3ejflvq5q" path="res://sprites/ui/options.png" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://0jdvs34mnbor" path="res://sprites/ui/buttons/feed_gray.png" id="4_vivmo"]
 [ext_resource type="Texture2D" uid="uid://bykpjg16ev1x3" path="res://sprites/ui/buttons/feed.png" id="5_2cqfq"]
-[ext_resource type="Script" uid="uid://cdau41ruidjsy" path="res://web_file_dialog.gd" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://c117g5y0v0b24" path="res://sprites/ui/buttons/train_gray.png" id="6_yaehf"]
 [ext_resource type="Texture2D" uid="uid://bsjjoh6wgps2n" path="res://sprites/ui/buttons/train.png" id="7_074og"]
 [ext_resource type="Texture2D" uid="uid://57evn3byb1dv" path="res://sprites/ui/buttons/battle_gray.png" id="8_cegan"]
@@ -527,9 +526,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -1001.9048
+offset_left = -1200.0
 offset_top = 3.8095233
-offset_right = -782.7844
+offset_right = -936.9584
 offset_bottom = 272.40494
 grow_horizontal = 0
 scale = Vector2(4.510236, 4.510236)
@@ -578,9 +577,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 91.02844
+offset_left = 133.26047
 offset_top = -11.5
-offset_right = 99.02844
+offset_right = 141.26047
 offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
@@ -604,9 +603,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 93.02847
+offset_left = 135.26044
 offset_top = -11.5
-offset_right = 101.02847
+offset_right = 143.26044
 offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
@@ -630,9 +629,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 37.02832
+offset_left = 79.260315
 offset_top = -11.5
-offset_right = 45.02832
+offset_right = 87.260315
 offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
@@ -646,30 +645,17 @@ Background"
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="ImportButton" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/HBoxContainer"]
+[node name="Manual" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Import Save"
+text = "User Manuial"
 
-[node name="ExportButton" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/HBoxContainer"]
+[node name="Guide" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Export Save"
+text = "Evolution Guide"
 
 [node name="CloseButton" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 text = "Close"
-
-[node name="WebSaveDataPicker" type="Node" parent="."]
-script = ExtResource("5_lquwl")
-
-[node name="SaveDataPicker" type="FileDialog" parent="."]
-oversampling_override = 1.0
-title = "Open a File"
-initial_position = 1
-size = Vector2i(1015, 565)
-file_mode = 0
-access = 2
-filters = PackedStringArray("*.json", "application/json")
-folder_creation_enabled = false
 
 [node name="SaveTimer" type="Timer" parent="."]
 wait_time = 60.0
@@ -683,21 +669,19 @@ autostart = true
 [connection signal="pressed" from="ScreenBackground/BottomButtons/Sleep" to="." method="_on_sleep_pressed"]
 [connection signal="pressed" from="ScreenBackground/FeedMenu/VBoxContainer/HBoxContainer/FoodButton" to="." method="_on_food_button_pressed"]
 [connection signal="pressed" from="ScreenBackground/FeedMenu/VBoxContainer/HBoxContainer2/PillButton" to="." method="_on_pill_button_pressed"]
-[connection signal="pressed" from="Cage/Control/A" to="." method="_on_a_pressed"]
 [connection signal="pressed" from="Cage/Control/A" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Cage/Control/B" to="." method="_on_b_pressed"]
+[connection signal="pressed" from="Cage/Control/A" to="." method="_on_a_pressed"]
 [connection signal="pressed" from="Cage/Control/B" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Cage/Control/C" to="." method="_on_c_pressed"]
+[connection signal="pressed" from="Cage/Control/B" to="." method="_on_b_pressed"]
 [connection signal="pressed" from="Cage/Control/C" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Cage/Control/C" to="." method="_on_c_pressed"]
 [connection signal="pressed" from="UI/Control/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="color_changed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/BodyColor/Control/BodyColorPicker" to="." method="_on_body_color_changed"]
 [connection signal="color_changed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/CageColor/Control/CageColorPicker" to="." method="_on_cage_color_changed"]
 [connection signal="color_changed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/BackgroundColor/Control/BackgroundColorPicker" to="." method="_on_background_color_changed"]
 [connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/CycleScreenBackground" to="." method="_on_cycle_screen_background_pressed"]
 [connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/CycleScreenBackground" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/HBoxContainer/ImportButton" to="." method="_on_import_button_pressed"]
-[connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/HBoxContainer/ExportButton" to="." method="_on_export_button_pressed"]
+[connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/HBoxContainer/Manual" to="." method="_on_manual_pressed"]
+[connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/HBoxContainer/Guide" to="." method="_on_guide_pressed"]
 [connection signal="pressed" from="UI/Control/Options/MarginContainer/Control/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="file_loaded" from="WebSaveDataPicker" to="." method="_on_web_save_data_picker_file_loaded"]
-[connection signal="file_selected" from="SaveDataPicker" to="." method="_on_save_data_selected"]
 [connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]
