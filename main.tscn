@@ -647,7 +647,7 @@ layout_mode = 2
 
 [node name="Manual" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "User Manuial"
+text = "User Manual"
 
 [node name="Guide" type="Button" parent="UI/Control/Options/MarginContainer/Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
